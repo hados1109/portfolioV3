@@ -22,9 +22,34 @@ QUALITY = "75"
 MAX_WIDTH = {"hero": 1040 * 2, "fullwidth": 934 * 2, "center": 560 * 2}
 
 
-def width_of(path):
-    out = subprocess.run(["sips", "-g", "pixelWidth", str(path)], capture_output=True, text=True, check=True).stdout
-    return int(re.search(r"pixelWidth: (\d+)", out).group(1))
+def size_of(path):
+    out = subprocess.run(["sips", "-g", "pixelWidth", "-g", "pixelHeight", str(path)], capture_output=True, text=True, check=True).stdout
+    return int(re.search(r"pixelWidth: (\d+)", out).group(1)), int(re.search(r"pixelHeight: (\d+)", out).group(1))
+
+
+def target_size(w, h, cap):
+    """Scale down to `cap` wide, keeping both sides even: sips saves large AVIFs as tiles, and
+    browsers render a tiled AVIF with an odd width or height as fully transparent."""
+    if w > cap:
+        w, h = cap, h * cap / w
+    return max(2, round(w / 2) * 2), max(2, round(h / 2) * 2)
+
+
+def encode(src, dst, cap):
+    """Write `src` to `dst` as AVIF, resized per target_size(). Returns the new file's size in bytes."""
+    w, h = size_of(src)
+    tw, th = target_size(w, h, cap)
+    with tempfile.TemporaryDirectory() as tmp:
+        work = Path(tmp) / "in.png"  # resize losslessly first, then encode once
+        cmd = ["sips", "-s", "format", "png", str(src), "--out", str(work)]
+        if (tw, th) != (w, h):
+            cmd[1:1] = ["--resampleHeightWidth", str(th), str(tw)]
+        subprocess.run(cmd, capture_output=True, check=True)
+        out = Path(tmp) / "out.avif"
+        subprocess.run(["sips", "-s", "format", "avif", "-s", "formatOptions", QUALITY, str(work), "--out", str(out)],
+                       capture_output=True, check=True)
+        out.replace(dst)
+    return dst.stat().st_size
 
 
 def optimize(rel, cap):
@@ -32,17 +57,12 @@ def optimize(rel, cap):
     if not src.exists() or src.suffix.lower() not in (".png", ".jpg", ".jpeg", ".avif"):
         return rel
     dst = src.with_suffix(".avif")
+    w, h = size_of(src)
+    if src.suffix.lower() == ".avif" and w <= cap:
+        return rel  # already AVIF and not oversized: re-encoding would only lose quality
     with tempfile.TemporaryDirectory() as tmp:
-        work = Path(tmp) / ("in" + src.suffix)
-        cmd = ["sips", str(src), "--out", str(work)]
-        if width_of(src) > cap:
-            cmd[1:1] = ["--resampleWidth", str(cap)]
-        elif src.suffix.lower() == ".avif":
-            return rel  # already AVIF and not oversized: re-encoding would only lose quality
-        subprocess.run(cmd, capture_output=True, check=True)
         out = Path(tmp) / "out.avif"
-        subprocess.run(["sips", "-s", "format", "avif", "-s", "formatOptions", QUALITY, str(work), "--out", str(out)],
-                       capture_output=True, check=True)
+        encode(src, out, cap)
         if out.stat().st_size >= src.stat().st_size:
             return rel
         before = src.stat().st_size
