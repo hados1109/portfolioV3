@@ -101,7 +101,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 .dynamic-meta-item{ flex:1; width:50%; }
 .dynamic-meta-item-data{ display:flex; align-items:center; gap:8px; margin-top:8px; }
 .meta-item-image-container{ width:28px; height:28px; display:flex; justify-content:center; align-items:center; border:1px solid var(--tertiary); border-radius:2px; color:var(--secondary); }
-.meta-item-image-container svg{ width:16px; height:16px; }
+.meta-item-image{ display:block; width:22px; height:22px; }
 .crop-mark{ position:absolute; width:32px; height:32px; background:url("../img/ui/crop-marks.png") center/100% 100% no-repeat; pointer-events:none; }
 .crop-mark-top-left{ top:-40px; left:-40px; }
 .crop-mark-top-right{ top:-40px; right:-40px; transform:rotate(90deg); }
