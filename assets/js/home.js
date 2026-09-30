@@ -1,22 +1,22 @@
 (function(){
   /* ---------------- Content ---------------- */
   var PROJECTS = [
-    {href:"https://vinyaspandey.webflow.io/work/browse-experience", img:"assets/img/projects/browse-experience.avif", w:"786", h:"1162", tags:["Product Design","Content Discovery"],
+    {href:"work/browse-experience/", img:"assets/img/projects/browse-experience.avif", w:"786", h:"1162", tags:["Product Design","Content Discovery"],
      title:"Driving Engagement and Trust with Standards and Curriculum Aligned Resources",
      desc:"Quizizz is mainly used for a review use case, which is a once-a-month use case. Although Quizizz hosts a vast public library with resources on every granularity, there is some gap when communicating this to the teachers. We paired up these resources with the widely used standards and curricula that teachers rely on and aced the high frequency use case."},
-    {href:"https://vinyaspandey.webflow.io/work/quizizz-demo-experience", img:"assets/img/projects/quizizz-demo-experience.avif", w:"1218", h:"1800", tags:["Visual Design","User Onboarding"],
+    {href:"work/quizizz-demo-experience/", img:"assets/img/projects/quizizz-demo-experience.avif", w:"1218", h:"1800", tags:["Visual Design","User Onboarding"],
      title:"Boosting activation by communicating the Quizizz USP during signup",
      desc:"Quizizz has an activation rate of ~20% for US users. In an attempt to boost this number, the team hypothesized that users do not understand Quizizz's USP in their first interaction, and hence drop off. This project is an attempt to communicate what Quizizz offers to their users in an interactive manner."},
-    {href:"https://vinyaspandey.webflow.io/work/quizizz-org-picker", img:"assets/img/projects/quizizz-org-picker.avif", w:"786", h:"1162", tags:["Feature Revamp","Product QA"],
+    {href:"work/quizizz-org-picker/", img:"assets/img/projects/quizizz-org-picker.avif", w:"786", h:"1162", tags:["Feature Revamp","Product QA"],
      title:"Redesigning the Quizizz org picker for accuracy and consistency",
      desc:"Inaccuracy of org data is a problem that is very prominent in Quizizz. This affects content recommendation accuracy, reduced admin trust, and hassles in lead generation. This project rethinks the org picker for teachers to make it easier for users to find their org, improve accuracy, and reduce dropoffs."},
-    {href:"https://vinyaspandey.webflow.io/work/msdc-2022", img:"assets/img/projects/msdc-2022.avif", w:"609", h:"900", tags:["Problem Identification","Product Design"],
+    {href:"work/msdc-2022/", img:"assets/img/projects/msdc-2022.avif", w:"609", h:"900", tags:["Problem Identification","Product Design"],
      title:"Reigniting the Emotional Quotient in Virtual Communication within the Workplace",
      desc:"Employees are not able to communicate properly in a virtual setting because of a lack of emotional factors such as tone, gestures, and expressions. Here, I attempt to solve this problem as a part of Microsoft Design Challenge 2022 by incorporating these factors into their communication via various methods."},
-    {href:"https://vinyaspandey.webflow.io/work/e-summit-2021", img:"assets/img/projects/e-summit-2021.avif", w:"609", h:"900", tags:["Brand Identity","Web Design"],
+    {href:"work/e-summit-2021/", img:"assets/img/projects/e-summit-2021.avif", w:"609", h:"900", tags:["Brand Identity","Web Design"],
      title:"Defining the Brand Identity for IIT Roorkee's E-Summit 2021",
      desc:"Built the brand identity, created deliverables, and designed the website for the flagship event of E-Cell IIT Roorkee. E-Summit is held annually to bring together the entrepreneurial, venture, and academic communities to a common ground and provides an avenue to exhibit entrepreneurial talent and creativity through discussions, seminars, competitions, and more."},
-    {href:"https://vinyaspandey.webflow.io/work/e-id-portal", img:"assets/img/projects/e-id-portal.avif", w:"609", h:"900", tags:["SaaS Design","In-house Tool"],
+    {href:"work/e-id-portal/", img:"assets/img/projects/e-id-portal.avif", w:"609", h:"900", tags:["SaaS Design","In-house Tool"],
      title:"Designing the e-ID Card Management and Distribution Portal for IIT Roorkee",
      desc:"Distributing and managing the physical ID cards of more than 8000 students was a hassle for the Dean of Students' Welfare. Hence we developed this in-house tool digitalize ID cards, distribute them, and manage and resolve queries if any."}
   ];
@@ -34,7 +34,7 @@
     return out;
   }
   document.getElementById("projectsList").innerHTML = PROJECTS.map(function(p){
-    return '<div class="project-container" role="listitem"><a class="project-link-container" href="'+p.href+'" target="_blank" rel="noopener">'+
+    return '<div class="project-container" role="listitem"><a class="project-link-container" href="'+p.href+'">'+
       '<div class="project-attributes-container top" aria-hidden="true"><div class="project-attributes-list">'+attrStrip(p.tags)+'</div></div>'+
       '<div class="project-content-and-image"><div class="project-title-and-subtitle"><h2>'+esc(p.title)+'</h2><p class="project-description">'+esc(p.desc)+'</p>'+
       '<span class="sr-only">'+esc(p.tags.join(", "))+'</span></div>'+

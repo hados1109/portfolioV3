@@ -43,8 +43,9 @@
     if (visible.length <= 1) { stack.forEach(function(el){ el.hidden = false; }); } else { visible[0].hidden = true; }
   });
 
-  /* Current-page link scrolls to top */
-  document.getElementById("homeLink").addEventListener("click", function(e){
+  /* Current-page link scrolls to top (project pages have none) */
+  var homeLink = document.getElementById("homeLink");
+  if (homeLink) homeLink.addEventListener("click", function(e){
     e.preventDefault(); window.scrollTo({top:0, behavior: reduceMQ.matches ? "auto" : "smooth"});
   });
 
