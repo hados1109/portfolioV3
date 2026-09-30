@@ -130,8 +130,9 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 .handle-box-decor.top-right{ top:-8px; right:-8px; } .handle-box-decor.bottom-right{ bottom:-8px; right:-8px; }
 .logos-carousel-container{ position:relative; align-self:stretch; margin-top:8px; padding:64px 0; overflow:hidden; }
 .logos-carousel{ position:relative; width:100%; display:flex; align-items:center; }
-.logos-image{ position:relative; flex:none; height:48px; width:1587px; animation:logos 16s linear infinite; animation-play-state:paused; }
-.logo-name{ position:absolute; top:0; height:48px; display:flex; align-items:center; justify-content:center; white-space:nowrap; color:#d9d9db; font-size:22px; font-weight:400; letter-spacing:.2px; }
+/* One row of logos, repeated twice so the loop is seamless; the trailing padding equals the gap */
+.logos-image{ position:relative; flex:none; display:flex; align-items:center; gap:44px; padding-right:44px; height:48px; animation:logos 17.2s linear infinite; animation-play-state:paused; }
+.logo{ flex:none; width:auto; max-width:none; height:var(--h); }
 .logos-carousel.playing .logos-image{ animation-play-state:running; }
 
 @keyframes logos{ from{ transform:translateX(0); } to{ transform:translateX(-100%); } }
@@ -295,8 +296,8 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
   .secret-footer-container{ display:none; }
   .projects-title-container{ padding:80px 16px; }
   .logos-carousel-container{ margin-top:0; padding:16px 0 0; }
-  .logos-image{ height:40px; width:1323px; }
-  .logo-name{ height:40px; font-size:18px; transform-origin:0 50%; }
+  .logos-image{ height:40px; gap:calc(44px*5/6); padding-right:calc(44px*5/6); }
+  .logo{ height:calc(var(--h)*5/6); }
   .testimonials-container{ padding-left:16px; padding-right:16px; }
   .testimonial-bottom-content{ padding:0 12px 12px; }
   .testimonial-top-left{ height:16px; } .testimonial-top-right-fold{ width:16px; height:16px; }
