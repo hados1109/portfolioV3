@@ -145,7 +145,8 @@ def render(p):
         parts.append(section("Extras", p["extras"]))
 
     return TEMPLATE.format(
-        up=UP, title="Vinyas Pandey", og_title=esc(p["Heading"]), description=esc(p["description"]),
+        up=UP, title=esc(p["Heading"]) + " – Vinyas Pandey", og_title=esc(p["Heading"]),
+        description=esc(p["description"]),
         url=page_url, og_image=og, resume=RESUME, content="".join(parts), secret=SECRET_FOOTER)
 
 
@@ -246,6 +247,23 @@ def main():
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(render(r), encoding="utf-8")
         print("built", out.relative_to(ROOT))
+
+    write_sitemap(rows)
+
+
+def write_sitemap(rows):
+    """Write sitemap.xml for the home page, about page, and published projects."""
+    urls = [SITE_URL, SITE_URL + "about/"] + [SITE_URL + "work/%s/" % r["Slug"] for r in rows]
+    body = "\n".join(
+        "  <url><loc>%s</loc></url>" % html.escape(url, quote=True) for url in urls)
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        "%s\n"
+        "</urlset>\n" % body)
+    path = ROOT / "sitemap.xml"
+    path.write_text(sitemap, encoding="utf-8")
+    print("built", path.relative_to(ROOT))
 
 
 if __name__ == "__main__":
