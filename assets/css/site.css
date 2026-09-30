@@ -131,7 +131,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 .logos-carousel-container{ position:relative; align-self:stretch; margin-top:8px; padding:64px 0; overflow:hidden; }
 .logos-carousel{ position:relative; width:100%; display:flex; align-items:center; }
 /* One row of logos, repeated twice so the loop is seamless; the trailing padding equals the gap */
-.logos-image{ position:relative; flex:none; display:flex; align-items:center; gap:44px; padding-right:44px; height:48px; animation:logos 17.2s linear infinite; animation-play-state:paused; }
+.logos-image{ position:relative; flex:none; display:flex; align-items:center; gap:44px; padding-right:44px; height:48px; animation:logos 19.4s linear infinite; animation-play-state:paused; }
 .logo{ flex:none; width:auto; max-width:none; height:var(--h); }
 .logos-carousel.playing .logos-image{ animation-play-state:running; }
 
