@@ -44,4 +44,10 @@ After editing the CSV (a spreadsheet app like Numbers or Google Sheets works; ke
 python3 scripts/build_projects.py
 ```
 
+When you add new project images, compress them first (macOS; converts to AVIF and sizes them for retina screens), then rebuild:
+
+```bash
+python3 scripts/optimize_images.py
+```
+
 A new project also needs a card: add it to `PROJECTS` in `assets/js/home.js` with `href:"work/<Slug>/"`.

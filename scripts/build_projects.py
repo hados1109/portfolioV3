@@ -37,6 +37,39 @@ def absolute(url):
     return url if re.match(r"^https?://", url) else SITE_URL + url.lstrip("/")
 
 
+def image_size(url):
+    """(width, height) of a local AVIF/PNG/GIF/JPEG, or None. Lets the browser reserve space before it loads."""
+    if re.match(r"^(https?:)?//", url):
+        return None
+    path = ROOT / url.split("?")[0]
+    if not path.exists():
+        return None
+    data = path.read_bytes()
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big")
+    if data[:6] in (b"GIF87a", b"GIF89a"):
+        return int.from_bytes(data[6:8], "little"), int.from_bytes(data[8:10], "little")
+    if b"ftypavif" in data[:32]:
+        # Large AVIFs are stored as a grid of tiles, each with its own size; the full image is the largest
+        sizes = [(int.from_bytes(data[m.start() + 8:m.start() + 12], "big"), int.from_bytes(data[m.start() + 12:m.start() + 16], "big"))
+                 for m in re.finditer(b"ispe", data[:65536])]
+        if sizes:
+            return max(sizes, key=lambda s: s[0] * s[1])
+    if data[:2] == b"\xff\xd8":
+        i = 2
+        while i < len(data) - 9:
+            marker, seglen = data[i + 1], int.from_bytes(data[i + 2:i + 4], "big")
+            if marker in (0xC0, 0xC1, 0xC2):
+                return int.from_bytes(data[i + 7:i + 9], "big"), int.from_bytes(data[i + 5:i + 7], "big")
+            i += 2 + seglen
+    return None
+
+
+def dims(url):
+    size = image_size(url)
+    return ' width="%d" height="%d"' % size if size else ""
+
+
 def truthy(v):
     return v.strip().lower() == "true"
 
@@ -52,7 +85,8 @@ def clean_rich_text(src):
         s = re.search(r'\ssrc="([^"]*)"', tag).group(1)
         alt = re.search(r'\salt="([^"]*)"', tag)
         alt = "" if not alt or alt.group(1) == "__wf_reserved_inherit" else alt.group(1)
-        return '<img src="%s" loading="lazy" alt="%s">' % (asset(html.unescape(s)).replace('"', "&quot;"), alt)
+        s = html.unescape(s)
+        return '<img src="%s"%s loading="lazy" decoding="async" alt="%s">' % (asset(s).replace('"', "&quot;"), dims(s), alt)
     h = re.sub(r"<img\b[^>]*>", img, h)
 
     h = re.sub(r"<iframe\b", '<iframe loading="lazy"', h)
@@ -89,8 +123,8 @@ def render(p):
     parts.append(
         '  <div class="project-hero-container">\n'
         '    <div class="project-hero-text"><h1 class="project-heading">%s</h1><p class="project-hero-description">%s</p></div>\n'
-        '    <div class="project-hero-image-container"><img class="project-hero-image" src="%s" alt="" fetchpriority="high"></div>\n'
-        '  </div>\n' % (esc(p["Heading"]), esc(p["description"]), esc(asset(hero))))
+        '    <div class="project-hero-image-container"><img class="project-hero-image" src="%s"%s alt="" fetchpriority="high"></div>\n'
+        '  </div>\n' % (esc(p["Heading"]), esc(p["description"]), esc(asset(hero)), dims(hero)))
     parts.append(
         '  <div class="project-content-container"><div class="project-meta-flex">\n'
         '    <div class="project-meta-individual"><p>Client:</p><p>%s</p></div>\n'
