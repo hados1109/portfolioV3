@@ -59,7 +59,7 @@
   var mainMQ = window.matchMedia("(min-width: 992px)");
   function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
   function lerpKF(p, k0, v0, k1, v1){ var t = clamp((p*100 - k0)/(k1 - k0), 0, 1); return v0 + (v1 - v0)*t; }
-  // Webflow's "while scrolling in view" progress, same maths as the original site
+  // Progress (0–1) of an element scrolling through the viewport, with optional start/end offsets in %
   function inViewProgress(el, o){
     var r = el.getBoundingClientRect(), d = window.innerHeight, s = document.documentElement.scrollHeight;
     var so = (o.addStart ? o.start : 0)/100, eo = (o.addEnd ? o.end : 0)/100;
@@ -68,7 +68,7 @@
     var f = Math.min(d + (r.top + r.height*eo - l), s);
     return f > 0 ? Math.min(Math.max(0, d - l), f)/f : 0;
   }
-  // smoothed values; h = 1 - smoothing, applied every frame (as in Webflow IX2)
+  // Smoothed values: each frame moves h = 1 - smoothing of the way to the target
   function Param(start, smoothing){ return {cur:start, tgt:start, h:Math.max(1 - smoothing, .01)}; }
   var P = {
     glowX: Param(.5,.75), hx: Param(.5,.75), hy: Param(.5,.75),

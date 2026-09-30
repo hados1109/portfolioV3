@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build the project pages (work/<slug>/index.html) from content/projects.csv.
 
-The CSV has the same columns as the Webflow CMS export, so a fresh export can be
-dropped in as-is. Run from anywhere:
+One row per project; see the "Project pages" section of README.md for the columns.
+Run from anywhere:
 
     python3 scripts/build_projects.py
 
@@ -74,41 +74,37 @@ def truthy(v):
     return v.strip().lower() == "true"
 
 
-def clean_rich_text(src):
-    """Turn Webflow's exported rich text into the markup Webflow renders on the live site."""
+def prepare_rich_text(src):
+    """Rich text from the CSV, with image paths fixed up for the page and images/embeds set to load lazily."""
     h = src
-    h = re.sub(r'\s+id=""', "", h)
-    h = re.sub(r'\s+data-(?:rt-[a-z-]+|page-url)="[^"]*"', "", h)
 
     def img(m):
         tag = m.group(0)
         s = re.search(r'\ssrc="([^"]*)"', tag).group(1)
         alt = re.search(r'\salt="([^"]*)"', tag)
-        alt = "" if not alt or alt.group(1) == "__wf_reserved_inherit" else alt.group(1)
+        alt = alt.group(1) if alt else ""
         s = html.unescape(s)
         return '<img src="%s"%s loading="lazy" decoding="async" alt="%s">' % (asset(s).replace('"', "&quot;"), dims(s), alt)
     h = re.sub(r"<img\b[^>]*>", img, h)
 
     h = re.sub(r"<iframe\b", '<iframe loading="lazy"', h)
     h = re.sub(r'(<a\b[^>]*target="_blank")', r'\1 rel="noopener"', h)
-    h = re.sub(r"<(ul|ol)\b", r'<\1 role="list"', h)
     return h
 
 
 def section(label, body_html):
     return ('  <div class="project-content-container">\n'
-            '    <p class="wavy-underline paragraph">%s</p><p>&nbsp;</p>\n'
-            '    <div class="w-richtext">%s</div>\n'
-            '  </div>\n') % (label, clean_rich_text(body_html))
+            '    <p class="wavy-underline section-label">%s</p><p>&nbsp;</p>\n'
+            '    <div class="rich-text">%s</div>\n'
+            '  </div>\n') % (label, prepare_rich_text(body_html))
 
 
 def metric(value, label):
-    return ('    <div class="card-layout project-metric">'
+    return ('    <div class="project-metric">'
             '<div class="testimonial-top-content"><div class="testimonial-top-left"></div>'
             '<img class="testimonial-top-right-fold" src="%sassets/img/ui/card-fold.png" alt=""></div>'
-            '<div class="testimonial-bottom-content not-really-it-is-a-metric">'
-            '<h2 class="heading-4">%s</h2><p class="author-name">%s</p></div></div>\n') % (
-        UP, esc(value.replace("‍", "")), esc(label))
+            '<div class="testimonial-bottom-content project-metric-body">'
+            '<h2>%s</h2><p>%s</p></div></div>\n') % (UP, esc(value), esc(label))
 
 
 def render(p):
@@ -133,11 +129,11 @@ def render(p):
         '  </div></div>\n' % (esc(p["org"]), esc(p["timeline"]), esc(p["team"])))
     parts.append(
         '  <div class="project-content-container">\n'
-        '    <p class="wavy-underline paragraph">Overview</p><p>&nbsp;</p>\n'
+        '    <p class="wavy-underline section-label">Overview</p><p>&nbsp;</p>\n'
         '    <h1 class="project-goal">The goal</h1><p>%s</p>\n'
         '%s'
         '  </div>\n' % (esc(p["goal"]),
-                        '    <p>&nbsp;</p><p>&nbsp;</p><p class="wavy-underline paragraph">Results</p>\n' if results else ""))
+                        '    <p>&nbsp;</p><p>&nbsp;</p><p class="wavy-underline section-label">Results</p>\n' if results else ""))
     if results:
         parts.append('  <div class="project-content-container results">\n%s  </div>\n' % "".join(
             metric(p["m%d-heading" % i], p["m%d-desc" % i]) for i in (1, 2, 3)))

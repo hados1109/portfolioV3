@@ -61,7 +61,7 @@ def main():
         caps[r["full-thumbnail"]] = MAX_WIDTH["hero"]
         for k in ("research", "final-solution", "extras"):
             for fig in re.findall(r"<figure\b.*?</figure>", r[k], re.S):
-                kind = "center" if "w-richtext-align-center" in fig else "fullwidth"
+                kind = "center" if "align-center" in fig else "fullwidth"
                 for s in re.findall(r'<img[^>]*src="([^"]+)"', fig):
                     caps[s] = max(caps.get(s, 0), MAX_WIDTH[kind])
     for rel, cap in caps.items():

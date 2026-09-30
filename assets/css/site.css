@@ -144,8 +144,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 .zig-zag{ position:absolute; z-index:1; top:0; bottom:0; left:0; width:41px; background:url("../img/ui/carousel-zigzag.png") 0 0/41px auto repeat-y; pointer-events:none; }
 .zig-zag.right{ left:auto; right:0; transform:rotate(180deg); }
 .projects-carousel{ display:flex; justify-content:flex-start; align-items:center; }
-.projects-list{ display:flex; justify-content:center; align-items:stretch; gap:40px; will-change:transform; }
-.projects-list::before,.projects-list::after{ content:" "; display:table; }
+.projects-list{ display:flex; justify-content:center; align-items:stretch; gap:40px; padding:0 40px; will-change:transform; }
 .project-container{ position:relative; width:1080px; display:flex; }
 .project-link-container{ display:flex; flex-flow:row; justify-content:center; align-items:center; width:1080px; height:60vh; min-height:696px; max-height:816px; border:1px solid var(--tertiary); border-radius:2px; background-color:var(--quaternary); text-decoration:none; }
 .project-link-container:focus-visible{ outline-offset:-4px; }
@@ -226,7 +225,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
   .zig-zag{ display:none; }
   .projects-carousel{ justify-content:center; padding:0 60px; }
   .project-container{ width:100%; justify-content:center; align-items:center; }
-  .projects-list{ flex-flow:column; gap:60px; width:100%; transform:none !important; }
+  .projects-list{ flex-flow:column; gap:60px; width:100%; padding:60px 0; transform:none !important; }
   .project-link-container{ width:100%; height:auto; min-height:0; max-height:none; gap:12px; }
   .project-content-and-image{ flex-flow:column; gap:40px; padding:80px 40px 90px; }
   .image-container.project .image-slot{ height:auto; }
@@ -262,7 +261,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
   .footer-actions-row.mailing{ display:none; }
   .at-a-glance-container{ display:none; }
   .projects-carousel{ padding:0; }
-  .projects-list{ gap:0; }
+  .projects-list{ gap:0; padding:0; }
   .project-link-container{ border-width:1px 0; margin-bottom:60px; padding:0 32px; border-radius:0; }
   .project-title-and-subtitle{ gap:12px; }
   .project-content-and-image{ gap:24px; padding:80px 0 36px; }
@@ -374,41 +373,38 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 .project-content-container.results{ display:flex; gap:40px; padding:40px 100px 0; }
 .project-meta-flex{ display:flex; }
 .project-meta-individual{ flex:1; display:flex; flex-flow:column; gap:8px; }
-.wavy-underline.paragraph{ line-height:32px; }
+.wavy-underline.section-label{ line-height:32px; }
 .project-goal{ margin-top:8px; }
-.card-layout.project-metric{ flex:1; }
-.testimonial-bottom-content.not-really-it-is-a-metric{ gap:2px; }
-.heading-4{ color:var(--primary); }
+.project-metric{ flex:1; }
+.testimonial-bottom-content.project-metric-body{ gap:2px; }
 
-/* Rich text (the CMS Process / Final solution / Extras fields), as Webflow renders it */
-.w-richtext::before,.w-richtext::after{ content:" "; display:table; grid-area:1/1/2/2; }
-.w-richtext::after{ clear:both; }
-.w-richtext h3{ color:var(--primary); margin:0; font-size:28px; font-weight:400; line-height:40px; }
-.w-richtext h4{ color:var(--primary); margin:10px 0; font-size:22px; font-weight:400; line-height:28px; }
-.w-richtext ul,.w-richtext ol{ overflow:hidden; color:var(--secondary); margin:0 0 10px; padding-left:20px; font-size:16px; font-weight:300; line-height:24px; }
-.w-richtext ol{ padding-left:40px; }
-.w-richtext li{ letter-spacing:.4px; }
-.w-richtext a{ color:var(--secondary); text-decoration:underline; }
-.w-richtext strong,.w-richtext b{ font-weight:bold; }
-.w-richtext blockquote{ color:var(--secondary); letter-spacing:.45px; border-left:5px solid #e2e2e2; margin:20px 0; padding:10px 20px; font-size:24px; font-style:italic; font-weight:300; line-height:34px; }
-.w-richtext figure{ position:relative; max-width:60%; margin:0 0 10px; }
-.w-richtext figure img{ display:inline-block; vertical-align:middle; width:100%; height:auto; }
-.w-richtext figure div{ color:transparent; font-size:0; }
-.w-richtext figure figcaption{ text-align:center; margin-top:5px; }
-.w-richtext figure.w-richtext-figure-type-image{ display:table; }
-.w-richtext figure.w-richtext-figure-type-image > div{ display:inline-block; }
-.w-richtext figure.w-richtext-figure-type-image > figcaption{ caption-side:bottom; display:table-caption; }
-.w-richtext figure.w-richtext-figure-type-video{ width:60%; height:0; }
-.w-richtext figure.w-richtext-figure-type-video > div{ width:100%; }
-.w-richtext figure.w-richtext-figure-type-video iframe{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
-.w-richtext figure.w-richtext-align-center{ clear:both; margin-left:auto; margin-right:auto; }
-.w-richtext figure.w-richtext-align-center.w-richtext-figure-type-image > div{ max-width:100%; }
-.w-richtext figure.w-richtext-align-normal{ clear:both; }
-.w-richtext figure.w-richtext-align-fullwidth{ display:block; clear:both; width:100%; max-width:100%; margin-left:auto; margin-right:auto; text-align:center; }
-.w-richtext figure.w-richtext-align-fullwidth > div{ display:inline-block; padding-bottom:inherit; }
-.w-richtext figure.w-richtext-align-fullwidth > figcaption{ display:block; }
-.w-richtext figure.w-richtext-align-floatleft{ float:left; clear:none; margin-right:15px; }
-.w-richtext figure.w-richtext-align-floatright{ float:right; clear:none; margin-left:15px; }
+/* Rich text (the Process / Final solution / Extras columns of content/projects.csv) */
+.rich-text::before,.rich-text::after{ content:""; display:table; }
+.rich-text::after{ clear:both; }
+.rich-text h3{ color:var(--primary); margin:0; font-size:28px; font-weight:400; line-height:40px; }
+.rich-text h4{ color:var(--primary); margin:10px 0; font-size:22px; font-weight:400; line-height:28px; }
+.rich-text ul,.rich-text ol{ overflow:hidden; color:var(--secondary); margin:0 0 10px; padding-left:20px; font-size:16px; font-weight:300; line-height:24px; }
+.rich-text ol{ padding-left:40px; }
+.rich-text li{ letter-spacing:.4px; }
+.rich-text a{ color:var(--secondary); text-decoration:underline; }
+.rich-text strong,.rich-text b{ font-weight:bold; }
+.rich-text blockquote{ color:var(--secondary); letter-spacing:.45px; border-left:5px solid #e2e2e2; margin:20px 0; padding:10px 20px; font-size:24px; font-style:italic; font-weight:300; line-height:34px; }
+/* Figures: <figure class="figure-image|figure-video align-full|align-center"><div>…</div></figure> */
+.rich-text figure{ position:relative; max-width:60%; margin:0 0 10px; }
+.rich-text figure > div{ font-size:0; }
+.rich-text figure img{ display:inline-block; vertical-align:middle; width:100%; height:auto; }
+.rich-text figcaption{ text-align:center; margin-top:5px; }
+.rich-text .figure-image{ display:table; }
+.rich-text .figure-image > div{ display:inline-block; }
+.rich-text .figure-image > figcaption{ caption-side:bottom; display:table-caption; }
+.rich-text .figure-video{ width:60%; height:0; }
+.rich-text .figure-video > div{ width:100%; }
+.rich-text .figure-video iframe{ position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+.rich-text .align-center{ clear:both; margin-left:auto; margin-right:auto; }
+.rich-text .align-center.figure-image > div{ max-width:100%; }
+.rich-text .align-full{ display:block; clear:both; width:100%; max-width:100%; margin-left:auto; margin-right:auto; text-align:center; }
+.rich-text .align-full > div{ display:inline-block; padding-bottom:inherit; }
+.rich-text .align-full > figcaption{ display:block; }
 
 @media screen and (max-width: 991px){
   .project-hero-container{ padding:140px 60px 0; }
@@ -430,7 +426,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
   .project-content-container{ padding:40px 16px 0; }
   .project-content-container.results{ gap:16px; padding:16px 16px 0; }
   .project-meta-flex{ gap:16px; }
-  .w-richtext h3{ font-size:20px; line-height:26px; }
-  .w-richtext li{ font-size:14px; line-height:22px; }
-  .w-richtext blockquote{ padding-left:12px; padding-right:12px; font-size:22px; line-height:30px; }
+  .rich-text h3{ font-size:20px; line-height:26px; }
+  .rich-text li{ font-size:14px; line-height:22px; }
+  .rich-text blockquote{ padding-left:12px; padding-right:12px; font-size:22px; line-height:30px; }
 }

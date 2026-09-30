@@ -9,7 +9,7 @@ Plain HTML site, published with GitHub Pages. Every commit to `main` goes live i
 | `index.html` | Landing page |
 | `about/index.html` | About page |
 | `work/<project>/index.html` | Project pages — generated, don't edit by hand (see below) |
-| `content/projects.csv` | All project page content (same columns as the Webflow CMS export) |
+| `content/projects.csv` | All project page content, one row per project |
 | `scripts/build_projects.py` | Turns `content/projects.csv` into the project pages |
 | `assets/css/site.css` | All styles, shared by every page |
 | `assets/js/home.js` | Landing page interactions and the project cards' text |
@@ -29,11 +29,13 @@ Plain HTML site, published with GitHub Pages. Every commit to `main` goes live i
 
 ## Project pages
 
-Each row of `content/projects.csv` becomes a page at `work/<Slug>/`. The columns work like the Webflow CMS fields:
+Each row of `content/projects.csv` becomes a page at `work/<Slug>/`. The columns:
 
 - `Heading`, `description`, `full-thumbnail`, `org`, `timeline`, `team`, `goal` fill the top of the page.
 - `m1-heading` … `m3-desc` are the three result cards, shown when `results-applicable` is `true`.
 - `research`, `final-solution` and `extras` are rich text (HTML) for the Process, Final solution and Extras sections, each shown when its `-applicable` column is `true`.
+  Images go in a figure: `<figure class="figure-image align-full"><div><img src="assets/img/work/…" alt=""></div></figure>` (use `align-center` for a narrower, centred image). YouTube videos use `figure-video` with an `<iframe>` inside the `<div>`; copy an existing one.
+- `home-thumbnail` and `attribute-1`/`attribute-2` are for the home page card (the card itself lives in `assets/js/home.js`).
 - Rows with `Archived` or `Draft` set to `true` are skipped. `order` sets the order.
 
 Images can be a full URL or a path from the site root, like `assets/img/work/msdc-2022/cover.avif`.
