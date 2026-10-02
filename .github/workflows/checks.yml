@@ -1,6 +1,6 @@
 # Runs on every push and pull request. GitHub Pages publishes the repo as it is, so this makes
 # sure what's committed is complete: pages rebuilt, images compressed, nothing pointing at a
-# missing file. Uses only the Python standard library, so there's nothing to install.
+# missing file. Installs what the build needs from scripts/requirements.txt.
 name: Site checks
 
 on:
@@ -23,13 +23,16 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install the build's packages
+        run: pip install -r scripts/requirements.txt
+
       - name: Pages match src/ and content/
         run: |
           python scripts/build.py
           if [ -n "$(git status --porcelain)" ]; then
             git status --short
             git --no-pager diff --stat
-            echo "::error::The built pages are out of date. Run python3 scripts/build.py and commit the result. (Edit src/ and content/, not index.html, about/ or work/.)"
+            echo "::error::The built pages are out of date. Run .venv/bin/python scripts/build.py and commit the result. (Edit src/ and content/, not index.html, about/ or work/.)"
             exit 1
           fi
 

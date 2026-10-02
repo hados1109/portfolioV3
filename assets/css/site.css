@@ -381,7 +381,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 .project-metric{ flex:1; }
 .testimonial-bottom-content.project-metric-body{ gap:2px; }
 
-/* Rich text (the Process / Final solution / Extras columns of content/projects.csv) */
+/* Rich text (the # Process, # Final solution and # Extras sections of content/projects/<slug>/index.md) */
 .rich-text::before,.rich-text::after{ content:""; display:table; }
 .rich-text::after{ clear:both; }
 .rich-text h3{ color:var(--primary); margin:0; font-size:28px; font-weight:400; line-height:40px; }
