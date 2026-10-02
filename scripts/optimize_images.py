@@ -10,7 +10,7 @@ how to set it up).
 For each new or changed image it:
 - scales it down to twice the largest size it is ever shown at (sharp on retina screens), per RULES
 - turns PNG/JPEG into AVIF, and points every reference in src/, content/, assets/css and assets/js at the
-  new file, including the bare file names in a project's index.md
+  new file, including the bare file names in a project's index.md and in content/logos.csv
 - keeps the format where it has to stay (link-preview images, icons), and only compresses those
 - removes hidden metadata such as camera details and GPS location
 - keeps the result only when it is smaller
@@ -131,8 +131,9 @@ def encode(im, fmt, icc):
 
 def update_references(old, new):
     """Point every reference to the image `old` at `new` (both paths from the repo root). Images in
-    assets/img are referred to by any path ending in img/<path>, the CSS's ../img/ included; a
-    project's images by their full path, or in that project's index.md by their bare file name."""
+    assets/img are referred to by any path ending in img/<path>, the CSS's ../img/ included, and
+    logos in content/logos.csv by their bare file name; a project's images by their full path, or in
+    that project's index.md by their bare file name."""
     img = "assets/img/"
     if old.startswith(img):
         replace_in(REFERENCE_GLOBS, r"(?<=img/)" + re.escape(old[len(img):]), new[len(img):])
@@ -141,6 +142,8 @@ def update_references(old, new):
     folder, name = old.rsplit("/", 1)
     if (ROOT / folder).parent == PROJECTS:
         replace_in([folder + "/index.md"], r"(?<=[\s\"'(<])" + re.escape(name), new.rsplit("/", 1)[1])
+    elif folder == "assets/img/logos":
+        replace_in(["content/logos.csv"], r"(?:^|(?<=,))" + re.escape(name), new.rsplit("/", 1)[1])
 
 
 def replace_in(globs, pattern, new):
