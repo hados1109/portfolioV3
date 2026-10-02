@@ -218,9 +218,7 @@ def main():
     try:
         from PIL import features
     except ImportError:
-        sys.exit("This needs Pillow. Set up the project's Python once:\n"
-                 "  python3 -m venv .venv\n  .venv/bin/python -m pip install -r scripts/requirements.txt\n"
-                 "then run: .venv/bin/python scripts/optimize_images.py")
+        sys.exit("This needs Pillow. Install it once with: python3 -m venv .venv && .venv/bin/python -m pip install -r scripts/requirements.txt, then run: .venv/bin/python scripts/optimize_images.py")
     if not features.check("avif"):
         sys.exit("This Pillow can't write AVIF. Run: .venv/bin/python -m pip install --upgrade -r scripts/requirements.txt")
 

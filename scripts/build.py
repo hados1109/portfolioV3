@@ -3,7 +3,7 @@
 
     .venv/bin/python scripts/build.py
 
-  src/layout.html                   the shell shared by every page: <head>, red frame, navbar, footer
+  src/layout.html                    the shell shared by every page: <head>, red frame, navbar, footer
   src/pages/*.html                   one file per page (home, about, ...); the front matter says where it goes
   src/project.html                   the layout of a project page, filled in from each project's index.md
   content/site.json                  name, age, navbar links, footer links
@@ -32,9 +32,7 @@ try:
     from markdown.preprocessors import Preprocessor
     from markdown.treeprocessors import Treeprocessor
 except ImportError:
-    sys.exit("The build needs Markdown and PyYAML. Set up the project's Python once:\n"
-             "  python3 -m venv .venv\n  .venv/bin/python -m pip install -r scripts/requirements.txt\n"
-             "then run: .venv/bin/python scripts/build.py")
+    sys.exit("The build needs Markdown and PyYAML. Install them once with: python3 -m venv .venv && .venv/bin/python -m pip install -r scripts/requirements.txt, then run: .venv/bin/python scripts/build.py")
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"

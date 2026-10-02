@@ -19,9 +19,7 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    sys.exit("This needs PyYAML. Set up the project's Python once:\n"
-             "  python3 -m venv .venv\n  .venv/bin/python -m pip install -r scripts/requirements.txt\n"
-             "then run: .venv/bin/python scripts/new_project.py \"Project name\"")
+    sys.exit("This needs PyYAML. Install it once with: python3 -m venv .venv && .venv/bin/python -m pip install -r scripts/requirements.txt, then run: .venv/bin/python scripts/new_project.py \"Project name\"")
 
 ROOT = Path(__file__).resolve().parent.parent
 PROJECTS = ROOT / "content" / "projects"
