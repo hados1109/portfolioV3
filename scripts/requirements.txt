@@ -1,1 +1,3 @@
-Pillow>=11.3  # AVIF support, used by optimize_images.py
+Markdown>=3.5  # project pages (content/projects/*/index.md), used by build.py
+PyYAML>=6      # the settings at the top of each index.md
+Pillow>=11.3   # AVIF support, used by optimize_images.py
