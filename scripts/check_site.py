@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""Check the built site for broken links and images. Run after scripts/build.py:
+
+    python3 scripts/check_site.py
+
+Fails if a page links to, or shows, a file that doesn't exist (pages, images, CSS, JS, the
+sitemap, link-preview images). Warns, without failing, about case-study images that have no
+alt text and images in assets/img that nothing uses. External links are checked weekly by
+.github/workflows/links.yml. Only the Python standard library is used.
+"""
+import html
+import os
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SITE_URL = "https://vinyas.me/"
+SKIP_DIRS = {"src", "scripts", ".git", ".github", ".claude", "node_modules"}
+CI = "GITHUB_ACTIONS" in os.environ
+
+
+def report(kind, file, message):
+    if CI:
+        print("::%s file=%s::%s" % (kind, file, message))
+    else:
+        print("%s: %s: %s" % (kind, file, message))
+
+
+def pages():
+    for path in sorted(ROOT.rglob("*.html")):
+        if not SKIP_DIRS.intersection(path.relative_to(ROOT).parts):
+            yield path
+
+
+def resolve(base_dir, url):
+    """The file a local URL points at (a folder means its index.html), or None for external links."""
+    url = html.unescape(url).split("#")[0].split("?")[0]
+    if url.startswith(SITE_URL):
+        target = ROOT / url[len(SITE_URL):]
+    elif not url or re.match(r"^([a-zA-Z][a-zA-Z0-9+.-]*:|//)", url):
+        return None
+    elif url.startswith("/"):
+        target = ROOT / url.lstrip("/")
+    else:
+        target = base_dir / url
+    if url.endswith("/") or target.is_dir():
+        target = target / "index.html"
+    return target
+
+
+def main():
+    errors, used = 0, set()
+
+    def check(source, base_dir, url):
+        nonlocal errors
+        target = resolve(base_dir, url)
+        if target is None:
+            return
+        target = Path(os.path.normpath(target))
+        used.add(target)
+        if not target.is_file():
+            errors += 1
+            report("error", source, "points at %s, which doesn't exist" % url)
+
+    for page in pages():
+        rel = page.relative_to(ROOT).as_posix()
+        text = page.read_text(encoding="utf-8")
+        for name, value in re.findall(r'\s(src|href|srcset|poster)="([^"]*)"', text):
+            for url in ([part.strip().split(" ")[0] for part in value.split(",")] if name == "srcset" else [value]):
+                check(rel, page.parent, url)
+        for url in re.findall(r'<meta property="og:image" content="([^"]*)"', text):
+            check(rel, page.parent, url)
+
+        # Case-study images (lazy-loaded) and the hero without alt text
+        missing_alt = len(re.findall(r'<img\b(?=[^>]*\bloading="lazy")(?=[^>]*\balt="")[^>]*>', text)) if rel.startswith("work/") else 0
+        if missing_alt:
+            report("warning", rel, "%d case-study images have no alt text (see issue #4)" % missing_alt)
+
+    for css in sorted((ROOT / "assets" / "css").glob("*.css")):
+        rel = css.relative_to(ROOT).as_posix()
+        for url in re.findall(r'url\(["\']?([^"\')]+)["\']?\)', css.read_text(encoding="utf-8")):
+            check(rel, css.parent, url)
+
+    sitemap = ROOT / "sitemap.xml"
+    for url in re.findall(r"<loc>([^<]*)</loc>", sitemap.read_text(encoding="utf-8")):
+        check("sitemap.xml", ROOT, url)
+
+    img_dir = ROOT / "assets" / "img"
+    unused = [p for p in sorted(img_dir.rglob("*")) if p.is_file() and p.suffix.lower() in (".avif", ".png", ".jpg", ".jpeg", ".gif", ".webp") and p not in used]
+    for p in unused:
+        report("warning", p.relative_to(ROOT).as_posix(), "isn't used by any page")
+
+    print("%d broken reference%s, %d unused image%s." % (errors, "" if errors == 1 else "s", len(unused), "" if len(unused) == 1 else "s"))
+    return 1 if errors else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

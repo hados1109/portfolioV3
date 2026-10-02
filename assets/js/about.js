@@ -1,24 +1,5 @@
 (function(){
-  var LINKS = [
-    [{t:"Behance", s:"For best visuals", href:"https://www.behance.net/vinyaspandey"},
-     {t:"Medium", s:"For detailed studies", href:"https://medium.com/@vinyaspandey"}],
-    [{t:"Dribbble", s:"For on-the-go shots", href:"https://dribbble.com/bittu911"},
-     {t:"LinkedIn", s:"For professional stories", href:"https://www.linkedin.com/in/vinyaspandey1109/"}],
-    [{t:"vinyaspandey1109@gmail.com", s:"For old school mailing", href:"mailto:vinyaspandey1109@gmail.com?subject=%F0%9F%91%8B%F0%9F%8F%BB%20Hey%20there!%20Let's%20get%20on%20a%20call%3F", mail:true}]
-  ];
-  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
-  var bracket = function(bottom){ var b = bottom ? " bottom" : "";
-    return '<div class="footer-action-bracket'+b+'" aria-hidden="true"><span class="bracket-edge'+b+'"></span><span class="footer-edge-base'+b+'"></span><span class="bracket-edge right'+b+'"></span></div>'; };
-  document.getElementById("footerRows").outerHTML = LINKS.map(function(row){
-    return '<div class="footer-actions-row'+(row[0].mail?' mailing':'')+'">'+row.map(function(l){
-      return '<a class="footer-action" href="'+l.href+'"'+(l.mail?'':' target="_blank" rel="noopener"')+'>'+bracket(false)+
-        '<div class="footer-action-title-container"><h1 class="footer-action-title">'+esc(l.t)+'</h1><div class="footer-action-underline-container"><div class="footer-action-underline"></div></div></div>'+
-        bracket(true)+'<p class="footer-action-subtitle">'+esc(l.s)+'</p></a>';
-    }).join("")+'</div>';
-  }).join("");
-
   var reduceMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
-
 
   /* Navbar glow follows the cursor */
   var navGlow = document.getElementById("navGlow"), navbar = document.querySelector(".navbar");

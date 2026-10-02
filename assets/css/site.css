@@ -130,8 +130,9 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 .handle-box-decor.top-right{ top:-8px; right:-8px; } .handle-box-decor.bottom-right{ bottom:-8px; right:-8px; }
 .logos-carousel-container{ position:relative; align-self:stretch; margin-top:8px; padding:64px 0; overflow:hidden; }
 .logos-carousel{ position:relative; width:100%; display:flex; align-items:center; }
-/* One row of logos, repeated twice so the loop is seamless; the trailing padding equals the gap */
-.logos-image{ position:relative; flex:none; display:flex; align-items:center; gap:44px; padding-right:44px; height:48px; animation:logos 19.4s linear infinite; animation-play-state:paused; }
+/* One row of logos, repeated so the loop is seamless; the trailing padding equals the gap.
+   --logos-duration is set by scripts/build.py from the row's width, so the speed stays the same as logos are added. */
+.logos-image{ position:relative; flex:none; display:flex; align-items:center; gap:44px; padding-right:44px; height:48px; animation:logos var(--logos-duration, 19.4s) linear infinite; animation-play-state:paused; }
 .logo{ flex:none; width:auto; max-width:none; height:var(--h); }
 .logos-carousel.playing .logos-image{ animation-play-state:running; }
 
@@ -139,7 +140,8 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 
 /* ---------- Projects ---------- */
 .projects-title-container{ position:relative; padding:200px 100px 160px; }
-.work-container{ position:relative; display:flex; flex-flow:column; align-items:stretch; height:500vh; }
+/* Scroll length of the sideways carousel: one screen, plus 80vh for each card after the first (--cards is set by the build) */
+.work-container{ position:relative; display:flex; flex-flow:column; align-items:stretch; height:calc(100vh + (var(--cards, 6) - 1) * 80vh); }
 .work-carousel-sticky-container{ position:sticky; top:0; height:100vh; display:flex; justify-content:center; align-items:center; }
 .work-carousel-container{ position:relative; overflow:hidden; margin:0 -60px; width:calc(100% + 120px); }
 .zig-zag{ position:absolute; z-index:1; top:0; bottom:0; left:0; width:41px; background:url("../img/ui/carousel-zigzag.png") 0 0/41px auto repeat-y; pointer-events:none; }

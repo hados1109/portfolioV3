@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- {{generated}} -->
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{site_name}}">
+<meta property="og:title" content="{{og_title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{url}}">
+<meta property="og:image" content="{{og_image}}">
+{{og_image_size}}<meta property="og:image:alt" content="{{og_image_alt}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{og_title}}">
+<meta name="twitter:description" content="{{description}}">
+<meta name="twitter:image" content="{{og_image}}">
+<link rel="canonical" href="{{url}}">
+<link rel="icon" type="image/png" href="assets/img/ui/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/ui/webclip.png">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<!-- Fixed red frame -->
+<div class="rounded-border-top"></div><div class="rounded-border-left"></div><div class="rounded-border-right"></div><div class="rounded-border-bottom"></div>
+<div class="rounded-corner rc-tl"></div><div class="rounded-corner rc-tr"></div><div class="rounded-corner rc-bl"></div><div class="rounded-corner rc-br"></div>
+
+<!-- Navbar: the links come from "nav" in content/site.json -->
+<header class="navbar-container" id="navbarContainer">
+  <nav class="navbar" aria-label="Main">
+    <div class="navbar-profile-image">
+      <button class="navbar-profile-images-container" id="profileStack" type="button" aria-label="Show another photo of Vinyas">
+        <img class="profile-image pi-2" data-order="3" src="assets/img/profile/photo-4.avif" alt="">
+        <img class="profile-image pi-3" data-order="2" src="assets/img/profile/photo-3.avif" alt="">
+        <img class="profile-image pi-4" data-order="1" src="assets/img/profile/photo-2.avif" alt="">
+        <img class="profile-image pi-1" data-order="0" src="assets/img/profile/photo-1.avif" alt="">
+      </button>
+    </div>
+    <div class="navbar-controls">
+{{nav_links}}
+      <div class="navbar-glow-container" aria-hidden="true">
+        <div class="navbar-glow-divs" id="navGlow"><div class="navbar-glow glow-1"></div><div class="navbar-glow glow-2"></div></div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="{{main_class}}" id="top">
+{{content}}
+
+  <!-- Footer: the links come from "links" in content/site.json -->
+  <footer class="footer-container">
+    <div class="footer-header-text">
+      <h1 class="footer-heading"><span class="bon-vivant-style">Fascinated ?</span> &nbsp;Let's connect.</h1>
+      <span class="crop-mark crop-mark-top-right"></span><span class="crop-mark crop-mark-top-left"></span>
+    </div>
+{{footer_links}}
+    <div class="last-signature-container">
+      <p>{{site_name}}</p>
+      <div class="footer-signature-right"><p class="paragraph-bon-vivant-style">Portfolio</p><p>{{year}}</p></div>
+    </div>
+  </footer>
+</main>
+
+<div class="secret-footer-container" aria-hidden="true">
+  <div class="sf-corner sf-top-right"></div><div class="sf-corner sf-top-left"></div>
+  <h2 class="bon-vivant-style sf-easter-egg-text">{{secret}}</h2>
+</div>
+
+<script src="assets/js/{{script}}"></script>
+</body>
+</html>
