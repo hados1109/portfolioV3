@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Build every page of the site from the files in src/ and content/.
 
-    python3 scripts/build.py
+    .venv/bin/python scripts/build.py
 
-  src/layout.html                    the shell shared by every page: <head>, red frame, navbar, footer
+  src/layout.html                   the shell shared by every page: <head>, red frame, navbar, footer
   src/pages/*.html                   one file per page (home, about, ...); the front matter says where it goes
   src/project.html                   the layout of a project page, filled in from each project's index.md
   content/site.json                  name, age, navbar links, footer links
@@ -13,7 +13,7 @@
 Write paths from the site root (assets/img/..., about/) everywhere; they are fixed up for each
 page's folder. In a project's index.md, an image's bare file name means the file in that
 project's folder. Images without width/height get them filled in. Needs Python 3.9+ and the
-packages in scripts/requirements.txt.
+packages in scripts/requirements.txt, which README.md says how to set up in .venv.
 """
 import csv
 import datetime
@@ -32,7 +32,9 @@ try:
     from markdown.preprocessors import Preprocessor
     from markdown.treeprocessors import Treeprocessor
 except ImportError:
-    sys.exit("The build needs Markdown and PyYAML. Install them once with: python3 -m pip install --user -r scripts/requirements.txt")
+    sys.exit("The build needs Markdown and PyYAML. Set up the project's Python once:\n"
+             "  python3 -m venv .venv\n  .venv/bin/python -m pip install -r scripts/requirements.txt\n"
+             "then run: .venv/bin/python scripts/build.py")
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
@@ -180,7 +182,7 @@ def read_project(folder):
     slug, rel = folder.name, folder.relative_to(ROOT).as_posix()
     where = rel + "/index.md"
     if not (folder / "index.md").is_file():
-        raise BuildError('%s/ has no index.md. To start a project, run: python3 scripts/new_project.py "Project name"' % rel)
+        raise BuildError('%s/ has no index.md. To start a project, run: .venv/bin/python scripts/new_project.py "Project name"' % rel)
     if not re.match(r"^[a-z0-9]+(-[a-z0-9]+)*$", slug):
         raise BuildError("%s/: the folder's name is the page's address, so it should be lowercase words joined by hyphens, like my-project" % rel)
     text = (folder / "index.md").read_text(encoding="utf-8-sig").replace("\r\n", "\n")

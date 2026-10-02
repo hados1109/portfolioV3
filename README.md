@@ -4,17 +4,23 @@ Plain HTML site, published with GitHub Pages. Every commit to `main` goes live i
 
 The pages are built from a few source files by one script. You edit `src/` and `content/`, run the build, and commit everything.
 
-The scripts need three Python packages (Markdown, PyYAML and Pillow). Install them once:
+The scripts need three Python packages (Markdown, PyYAML and Pillow). Install them once, into a `.venv` folder in the project (git ignores it):
 
 ```bash
-python3 -m pip install --user -r scripts/requirements.txt
+python3 -m venv .venv
 ```
-
-Then, after each change:
 
 ```bash
-python3 scripts/build.py
+.venv/bin/python -m pip install -r scripts/requirements.txt
 ```
+
+Then run the scripts with that Python, `.venv/bin/python` (on Windows, `.venv\Scripts\python`). After each change:
+
+```bash
+.venv/bin/python scripts/build.py
+```
+
+If you'd rather type `python3`, run `source .venv/bin/activate` once in each new terminal window first.
 
 ## What's where
 
@@ -49,10 +55,10 @@ In the source files, write paths from the site root (`assets/img/…`, `about/`)
 
 ## Adding a project
 
-1. Run `python3 scripts/new_project.py "Project name"`. It makes `content/projects/<slug>/` from the template, as a draft.
+1. Run `.venv/bin/python scripts/new_project.py "Project name"`. It makes `content/projects/<slug>/` from the template, as a draft.
 2. Write `index.md` and drop the images in the folder: `hero.png` for the top of the page, `card.png` for the home page card, and the ones the case study shows (any PNG/JPEG/AVIF).
 3. Set `draft: false`.
-4. Run `python3 scripts/optimize_images.py`. It compresses the new images, points `index.md` at the `.avif` files it makes, and rebuilds the site.
+4. Run `.venv/bin/python scripts/optimize_images.py`. It compresses the new images, points `index.md` at the `.avif` files it makes, and rebuilds the site.
 5. Commit.
 
 The home page card, the project page, the sitemap and the carousel's scroll length all come from that one folder. Its name is the page's address, `work/<slug>/`. Set `draft: true` or `archived: true` to take a project down; its page and card both go.
@@ -90,14 +96,14 @@ file,name,height
 new-company.png,New Company,40
 ```
 
-`name` is what screen readers announce. `height` is how tall it shows, in px (the others are 27–48, so they look balanced). Then run `python3 scripts/optimize_images.py`. The loop gets longer, not faster: the speed stays at 99 px/s. The row repeats itself if there are only a few logos.
+`name` is what screen readers announce. `height` is how tall it shows, in px (the others are 27–48, so they look balanced). Then run `.venv/bin/python scripts/optimize_images.py`. The loop gets longer, not faster: the speed stays at 99 px/s. The row repeats itself if there are only a few logos.
 
 ## Images
 
 `scripts/optimize_images.py` works on macOS, Windows and Linux. After adding or replacing images, run:
 
 ```bash
-python3 scripts/optimize_images.py
+.venv/bin/python scripts/optimize_images.py
 ```
 
 It handles every image in `assets/img` and `content/projects`. It scales each one down to twice the largest size it's shown at (see `RULES` at the top of the script), turns PNG/JPEG into AVIF (and updates whatever points at them), and strips camera and GPS metadata. Images it has already done are listed in `scripts/optimized-images.json`, so it only touches new or replaced ones. GIFs and animated images are left alone. Link-preview images and icons keep their format.
@@ -115,7 +121,7 @@ Case-study images without alt text and unused images show up as warnings. `.gith
 To run the same checks yourself:
 
 ```bash
-python3 scripts/check_site.py
+.venv/bin/python scripts/check_site.py
 ```
 
 The footer year comes from the date of the build. In January, the first check of the year will ask for a rebuild. Run the build and commit.

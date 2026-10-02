@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Check the built site for broken links and images. Run after scripts/build.py:
 
-    python3 scripts/check_site.py
+    .venv/bin/python scripts/check_site.py
 
 Fails if a page links to, or shows, a file that doesn't exist (pages, images, CSS, JS, the
 sitemap, link-preview images). Warns, without failing, about case-study images that have no
 alt text and images in assets/img and content/projects that nothing uses. External links are
-checked weekly by .github/workflows/links.yml. Only the Python standard library is used.
+checked weekly by .github/workflows/links.yml. Only the Python standard library is used, so
+any Python 3.9+ can run it.
 """
 import html
 import os
@@ -16,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://vinyas.me/"
-SKIP_DIRS = {"src", "scripts", ".git", ".github", ".claude", "node_modules"}
+SKIP_DIRS = {"src", "scripts", ".git", ".github", ".claude", ".venv", "node_modules"}
 CI = "GITHUB_ACTIONS" in os.environ
 
 

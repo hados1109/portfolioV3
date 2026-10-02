@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Start a new project from content/projects/_template:
 
-    python3 scripts/new_project.py "Project name"
-    python3 scripts/new_project.py "Project name" --slug short-name   # to choose the page's address
+    .venv/bin/python scripts/new_project.py "Project name"
+    .venv/bin/python scripts/new_project.py "Project name" --slug short-name   # to choose the page's address
 
 Copies the template to content/projects/<slug>/, where <slug> is made from the name unless you
 give one. Fills in the title, puts the project last on the home page, and keeps it a draft (off
@@ -19,7 +19,9 @@ from pathlib import Path
 try:
     import yaml
 except ImportError:
-    sys.exit("This needs PyYAML. Install it once with: python3 -m pip install --user -r scripts/requirements.txt")
+    sys.exit("This needs PyYAML. Set up the project's Python once:\n"
+             "  python3 -m venv .venv\n  .venv/bin/python -m pip install -r scripts/requirements.txt\n"
+             "then run: .venv/bin/python scripts/new_project.py \"Project name\"")
 
 ROOT = Path(__file__).resolve().parent.parent
 PROJECTS = ROOT / "content" / "projects"
@@ -82,7 +84,7 @@ def main():
     print("  2. Put the images in %s: hero.png (top of the page), card.png (home page card)," % where)
     print("     and the ones the case study shows. PNG or JPEG is fine.")
     print("  3. Set draft: false in index.md.")
-    print("  4. Run python3 scripts/optimize_images.py. It compresses the images and rebuilds the site.")
+    print("  4. Run .venv/bin/python scripts/optimize_images.py. It compresses the images and rebuilds the site.")
     print("  5. Commit. The page will be at work/%s/." % slug)
 
 

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Compress every image in assets/img and content/projects. Works on macOS, Windows and Linux.
 
-    python3 -m pip install --user -r scripts/requirements.txt   # once
-    python3 scripts/optimize_images.py          # compresses new or changed images, then rebuilds the pages
-    python3 scripts/optimize_images.py --check  # lists images that still need it (used by CI; no install needed)
+    .venv/bin/python scripts/optimize_images.py          # compresses new or changed images, then rebuilds the pages
+    .venv/bin/python scripts/optimize_images.py --check  # lists images that still need it (used by CI; any Python will do)
+
+.venv is the project's own Python, with the packages in scripts/requirements.txt (README.md says
+how to set it up).
 
 For each new or changed image it:
 - scales it down to twice the largest size it is ever shown at (sharp on retina screens), per RULES
@@ -195,11 +197,11 @@ def check():
     manifest = load_manifest()
     pending = [rel(p) for p in images() if manifest.get(rel(p)) != sha(p)]
     if pending:
-        print("These images haven't been optimized yet. Run: python3 scripts/optimize_images.py")
+        print("These images haven't been optimized yet. Run: .venv/bin/python scripts/optimize_images.py")
         for r in pending:
             print("  " + r)
             if "GITHUB_ACTIONS" in os.environ:
-                print("::error file=%s::Not optimized. Run python3 scripts/optimize_images.py and commit the result." % r)
+                print("::error file=%s::Not optimized. Run .venv/bin/python scripts/optimize_images.py and commit the result." % r)
         return 1
     print("All %d images are optimized." % len(manifest))
     return 0
@@ -216,9 +218,11 @@ def main():
     try:
         from PIL import features
     except ImportError:
-        sys.exit("Pillow isn't installed. Run: python3 -m pip install --user -r scripts/requirements.txt")
+        sys.exit("This needs Pillow. Set up the project's Python once:\n"
+                 "  python3 -m venv .venv\n  .venv/bin/python -m pip install -r scripts/requirements.txt\n"
+                 "then run: .venv/bin/python scripts/optimize_images.py")
     if not features.check("avif"):
-        sys.exit("This Pillow can't write AVIF. Run: python3 -m pip install --user --upgrade -r scripts/requirements.txt")
+        sys.exit("This Pillow can't write AVIF. Run: .venv/bin/python -m pip install --upgrade -r scripts/requirements.txt")
 
     manifest = load_manifest()
     centered = centered_images()

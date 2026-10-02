@@ -32,7 +32,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git status --short
             git --no-pager diff --stat
-            echo "::error::The built pages are out of date. Run python3 scripts/build.py and commit the result. (Edit src/ and content/, not index.html, about/ or work/.)"
+            echo "::error::The built pages are out of date. Run .venv/bin/python scripts/build.py and commit the result. (Edit src/ and content/, not index.html, about/ or work/.)"
             exit 1
           fi
 
