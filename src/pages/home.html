@@ -1,0 +1,185 @@
+---
+# Builds index.html. Paths are written from the site root (assets/img/...).
+output: index.html
+title: Vinyas Pandey
+nav: home
+script: home.js
+secret: go back up, nothing here
+---
+
+  <!-- Images that follow the cursor when hovering underlined words -->
+  <div class="underline-hover-images-container" aria-hidden="true">
+    <div class="underline-hover-image rickroll" data-img="pronounce"><div class="image-container"><picture><source srcset="assets/img/hover/rickroll.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/rickroll.gif" alt="" width="320" height="320"></picture></div></div>
+    <div class="underline-hover-image" data-img="name"><div class="image-container"><img class="image-slot" src="assets/img/hover/name-photo.avif" alt="" width="738" height="984"></div></div>
+    <div class="underline-hover-image" data-img="hooked"><div class="image-container"><picture><source srcset="assets/img/hover/pokeballs.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/pokeballs.gif" alt="" width="640" height="640"></picture></div></div>
+    <div class="underline-hover-image enjoy" data-img="enjoy"><div class="image-container"><picture><source srcset="assets/img/hover/side-navigation-exploration.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/side-navigation-exploration.gif" alt="" width="400" height="300"></picture></div></div>
+    <div class="underline-hover-image delighted" data-img="delighted"><div class="image-container"><picture><source srcset="assets/img/hover/website-exploration.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/website-exploration.gif" alt="" width="560" height="398"></picture></div></div>
+    <div class="underline-hover-image inspired" data-img="inspired"><div class="image-container"><picture><source srcset="assets/img/hover/lightbulb.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/lightbulb.gif" alt="" width="720" height="720"></picture></div></div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero-container" aria-label="Introduction">
+    <div class="hero-heading-container">
+      <span class="crop-mark crop-mark-top-right"></span><span class="crop-mark crop-mark-top-left"></span>
+      <h1>I am <span class="bon-vivant-style wavy-underline bon-vivant-underline" data-hover="name">Vinyas Pandey</span>, a visual and product designer. I like to design cool stuff, stuff to obsess users, stuff which will get people <span class="wavy-underline" data-hover="hooked">hooked</span>, stuff which people will <span class="wavy-underline" data-hover="enjoy">enjoy</span> using, stuff which people are <span class="wavy-underline" data-hover="delighted">delighted</span> to use.</h1>
+    </div>
+    <div class="hero-heading-meta-container">
+      <span class="crop-mark crop-mark-bottom-left"></span><span class="crop-mark crop-mark-bottom-right"></span>
+      <p class="paragraph-text">{{age}} y/o designer from Noida, India</p>
+      <p class="paragraph-text bullet-point" aria-hidden="true">•</p>
+      <button class="name-pronunciation-container" id="pronounce" type="button" aria-label="How to pronounce Vinyas: ˈvɪn-jɑːs">
+        <img class="name-pronunciation-volume-icon" src="assets/img/ui/volume-icon.png" alt="">
+        <span class="paragraph-text">ˈvɪn-jɑːs</span>
+      </button>
+    </div>
+    <div class="hero-dynamic-meta-container">
+      <div class="dynamic-meta-item-row">
+        <div class="dynamic-meta-item">
+          <p class="paragraph-text">Current stint:</p>
+          <div class="dynamic-meta-item-data">
+            <div class="meta-item-image-container" aria-hidden="true"><img class="meta-item-image" src="assets/img/meta/workplace-sprinto.avif" alt="" width="44" height="44"></div>
+            <p class="paragraph-text">Designing at Sprinto</p>
+          </div>
+        </div>
+        <div class="dynamic-meta-item">
+          <p class="paragraph-text">Residing in:</p>
+          <div class="dynamic-meta-item-data">
+            <div class="meta-item-image-container" aria-hidden="true"><img class="meta-item-image" src="assets/img/meta/location.avif" alt="" width="44" height="44"></div>
+            <p class="paragraph-text">Noida, India</p>
+          </div>
+        </div>
+      </div>
+      <div class="dynamic-meta-item-row second">
+        <div class="dynamic-meta-item">
+          <p class="paragraph-text">Now playing:</p>
+          <div class="dynamic-meta-item-data">
+            <div class="meta-item-image-container" aria-hidden="true"><img class="meta-item-image" src="assets/img/meta/now-playing.avif" alt="" width="44" height="44"></div>
+            <p class="paragraph-text">AC: Shadows</p>
+          </div>
+        </div>
+        <div class="dynamic-meta-item">
+          <p class="paragraph-text">North star:</p>
+          <div class="dynamic-meta-item-data">
+            <div class="meta-item-image-container" aria-hidden="true"><img class="meta-item-image" src="assets/img/meta/north-star.avif" alt="" width="44" height="44"></div>
+            <p class="paragraph-text">💀💩L</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- At a glance: two rows that slide sideways as you scroll -->
+  <section class="at-a-glance-container" aria-label="Work at a glance">
+    <div class="glance-image-row" id="glance1">
+      <div class="at-a-glance-image"><div class="image-container"><img class="image-slot glance" src="assets/img/glance/glance-1.avif" alt="" width="540" height="540"></div></div>
+      <div class="at-a-glance-image"><div class="image-container"><img class="image-slot glance" src="assets/img/glance/glance-2.avif" alt="" width="1080" height="800"></div></div>
+      <div class="at-a-glance-image"><div class="image-container"><img class="image-slot glance" src="assets/img/glance/glance-3.avif" alt="" width="1200" height="1200"></div></div>
+      <div class="at-a-glance-image"><div class="image-container"><img class="image-slot glance" src="assets/img/glance/glance-4.avif" alt="" width="2400" height="1800"></div></div>
+    </div>
+    <div class="glance-image-row" id="glance2">
+      <div class="at-a-glance-image"><div class="image-container"><img class="image-slot glance" src="assets/img/glance/glance-5.avif" alt="" width="1600" height="1600"></div></div>
+      <div class="at-a-glance-image"><div class="image-container"><img class="image-slot glance" src="assets/img/glance/glance-6.avif" alt="" width="1620" height="1005"></div></div>
+      <div class="at-a-glance-image"><div class="image-container"><img class="image-slot glance" src="assets/img/glance/glance-7.avif" alt="" width="648" height="916"></div></div>
+      <div class="at-a-glance-image"><div class="image-container"><img class="image-slot glance" src="assets/img/glance/glance-8.avif" alt="" width="732" height="553"></div></div>
+    </div>
+  </section>
+
+  <!-- Work experience -->
+  <section class="work-experience-container" aria-label="Work experience">
+    <div class="experience-container">
+      <div class="work-experience-text-content">
+        <h2>Currently designing for product upliftment at Sprinto</h2>
+        <p class="paragraph-text work-experience-paragraph">Sprinto is a B2B SaaS platform that provides complete automation for compliance frameworks. It is designed primarily for fast-growing cloud and SaaS companies, but we are making our way up to the mid market segment, and winning against some industry leaders.<br><br>I am a designer in the workflow pod, which handles product asks for mid-market customers. I chase ease of use, product quality, and user satisfaction above all else. Instead of focusing on improving metrics, the pod is chasing customer asks and unblocking them in their compliance journey.</p>
+      </div>
+      <div class="handle-box-decor bottom-left"></div><div class="handle-box-decor top-left"></div>
+    </div>
+    <div class="experience-container">
+      <div class="work-experience-text-content">
+        <h2>Earlier, I was busy building B2C products</h2>
+        <p class="paragraph-text work-experience-paragraph">Dreaming to one day build something that people would include in their own portfolios. But till then, contributing to the betterment of other products.<br>Earlier, I was in the Schools and Districts pod, where I worked to increase the monthly active users, boost activation rate, and convert users to paid customers.</p>
+      </div>
+      <div class="handle-box-decor bottom-right"></div><div class="handle-box-decor top-right"></div>
+      <div class="logos-carousel-container" aria-label="Previous workplaces">
+        <span class="crop-mark work-top-right"></span><span class="crop-mark work-bottom-right"></span><span class="crop-mark work-bottom-left"></span><span class="crop-mark work-top-left"></span>
+        <!-- Logos come from content/logos.csv -->
+        <div class="logos-carousel" id="logos" style="--logos-duration:{{logos_duration}}">
+{{logos}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <div class="projects-title-container">
+    <h1>Following are some projects which I am proud of. They were made with days of daily sketches, iterations, back-and-forth reviews, rejections, and showerthoughts. I hope someone somewhere gets <span class="wavy-underline" data-hover="inspired">inspired</span> by them.</h1>
+  </div>
+  <section class="work-container" id="work" aria-label="Projects" style="--cards:{{project_count}}">
+    <div class="work-carousel-sticky-container">
+      <div class="work-carousel-container" id="carousel">
+        <div class="zig-zag" aria-hidden="true"></div><div class="zig-zag right" aria-hidden="true"></div>
+        <div class="projects-carousel">
+          <!-- Project cards come from content/projects.csv -->
+          <div class="projects-list" id="projectsList" role="list">
+{{projects}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-container" aria-labelledby="testimonialsHeading">
+    <h1 class="testimonials-heading" id="testimonialsHeading">What some folks say about me</h1>
+    <div class="all-testimonials-cards-block">
+      <div class="testimonials-cards-left">
+        <figure class="card-layout" style="margin:0">
+          <div class="testimonial-top-content"><div class="testimonial-top-left"></div><img class="testimonial-top-right-fold" src="assets/img/ui/card-fold.png" alt=""></div>
+          <div class="testimonial-bottom-content">
+            <blockquote style="margin:0"><h2 class="h2-testimonial">A motivated Vinyas can be a crown jewel of any team. He’s one of those rare guys who <span class="testimonial-highlight">can ship fast without trading off on quality</span>. And top it all off he’s just the funnest guys to be around.</h2></blockquote>
+            <img class="testimonial-wavy-underline" src="assets/img/ui/testimonial-wavy-line.png" alt="">
+            <figcaption class="testimonial-author-block">
+              <div class="author-image-block"><img class="author-image" src="assets/img/testimonials/prakhar-gupta.avif" alt=""></div>
+              <div class="author-name-and-designation"><p class="author-name">Prakhar Gupta</p><p>ex-Head of Design, Quizizz</p></div>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="card-layout" style="margin:0">
+          <div class="testimonial-top-content"><div class="testimonial-top-left"></div><img class="testimonial-top-right-fold" src="assets/img/ui/card-fold.png" alt=""></div>
+          <div class="testimonial-bottom-content">
+            <blockquote style="margin:0"><h2 class="h2-testimonial">Vinyas is someone who <span class="testimonial-highlight">explores solutions like none other</span>. At Eka Care, his speed of execution, ability to quickly switch contexts, and grasp valuable insights were some traits that were revered by all. His extreme focus on delight and user satisfaction is also something that I'm a fan of!</h2></blockquote>
+            <img class="testimonial-wavy-underline" src="assets/img/ui/testimonial-wavy-line.png" alt="">
+            <figcaption class="testimonial-author-block">
+              <div class="author-image-block"><img class="author-image" src="assets/img/testimonials/amit-bharti.avif" alt=""></div>
+              <div class="author-name-and-designation"><p class="author-name">Amit Bharti</p><p>Head of Design, Eka Care</p></div>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+      <div class="testimonial-cards-right">
+        <figure class="card-layout" style="margin:0">
+          <div class="testimonial-top-content"><div class="testimonial-top-left"></div><img class="testimonial-top-right-fold" src="assets/img/ui/card-fold.png" alt=""></div>
+          <div class="testimonial-bottom-content">
+            <blockquote style="margin:0"><h2 class="h2-testimonial">He goes beyond what is asked of him and explores new ideas. I was <span class="testimonial-highlight">able to trust him completely to take charge</span> and get things done on time.</h2></blockquote>
+            <img class="testimonial-wavy-underline" src="assets/img/ui/testimonial-wavy-line.png" alt="">
+            <figcaption class="testimonial-author-block">
+              <div class="author-image-block"><img class="author-image" src="assets/img/testimonials/saurabh-swami.avif" alt=""></div>
+              <div class="author-name-and-designation"><p class="author-name">Saurabh Swami</p><p>CDO, India Index; ex-Lead Designer, smallcase</p></div>
+            </figcaption>
+          </div>
+        </figure>
+        <figure class="card-layout" style="margin:0">
+          <div class="testimonial-top-content"><div class="testimonial-top-left"></div><img class="testimonial-top-right-fold" src="assets/img/ui/card-fold.png" alt=""></div>
+          <div class="testimonial-bottom-content">
+            <blockquote style="margin:0"><h2 class="h2-testimonial">You’d often find yourself in interesting discussions with him. If you look at his prototypes, I bet you’ll learn a thing or two: <span class="testimonial-highlight">the level of exploration, the polish, and the freshness of ideas</span>. He even has a keen eye for aesthetics which comes naturally from his passion for the craft.</h2></blockquote>
+            <img class="testimonial-wavy-underline" src="assets/img/ui/testimonial-wavy-line.png" alt="">
+            <figcaption class="testimonial-author-block">
+              <div class="author-image-block"><img class="author-image" src="assets/img/testimonials/vinod-kumar.avif" alt=""></div>
+              <div class="author-name-and-designation"><p class="author-name">Vinod Kumar</p><p>PD at Microsoft; ex-Lead Designer, Quizizz</p></div>
+            </figcaption>
+          </div>
+        </figure>
+        <p>...a lot of other stuff too, but I think you get the idea.</p>
+      </div>
+    </div>
+  </section>
+

@@ -1,0 +1,29 @@
+# Once a week, checks that links to other sites (Behance, Medium, YouTube, articles) still work.
+# If any are broken the run fails, GitHub emails you, and the run's summary lists them.
+name: External links
+
+on:
+  schedule:
+    - cron: "30 3 * * 1"  # Mondays, 09:00 in India
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    name: Check external links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          # 403/429/999: sites like LinkedIn and Medium block bots, which isn't a broken link
+          args: >-
+            --no-progress
+            --max-retries 3
+            --timeout 30
+            --accept "200..=299,403,429,999"
+            --exclude-path src
+            "./**/*.html"

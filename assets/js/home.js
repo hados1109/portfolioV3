@@ -1,59 +1,4 @@
 (function(){
-  /* ---------------- Content ---------------- */
-  var PROJECTS = [
-    {href:"work/browse-experience/", img:"assets/img/projects/browse-experience.avif", w:"786", h:"1162", tags:["Product Design","Content Discovery"],
-     title:"Driving Engagement and Trust with Standards and Curriculum Aligned Resources",
-     desc:"Quizizz is mainly used for a review use case, which is a once-a-month use case. Although Quizizz hosts a vast public library with resources on every granularity, there is some gap when communicating this to the teachers. We paired up these resources with the widely used standards and curricula that teachers rely on and aced the high frequency use case."},
-    {href:"work/quizizz-demo-experience/", img:"assets/img/projects/quizizz-demo-experience.avif", w:"1218", h:"1800", tags:["Visual Design","User Onboarding"],
-     title:"Boosting activation by communicating the Quizizz USP during signup",
-     desc:"Quizizz has an activation rate of ~20% for US users. In an attempt to boost this number, the team hypothesized that users do not understand Quizizz's USP in their first interaction, and hence drop off. This project is an attempt to communicate what Quizizz offers to their users in an interactive manner."},
-    {href:"work/quizizz-org-picker/", img:"assets/img/projects/quizizz-org-picker.avif", w:"786", h:"1162", tags:["Feature Revamp","Product QA"],
-     title:"Redesigning the Quizizz org picker for accuracy and consistency",
-     desc:"Inaccuracy of org data is a problem that is very prominent in Quizizz. This affects content recommendation accuracy, reduced admin trust, and hassles in lead generation. This project rethinks the org picker for teachers to make it easier for users to find their org, improve accuracy, and reduce dropoffs."},
-    {href:"work/msdc-2022/", img:"assets/img/projects/msdc-2022.avif", w:"609", h:"900", tags:["Problem Identification","Product Design"],
-     title:"Reigniting the Emotional Quotient in Virtual Communication within the Workplace",
-     desc:"Employees are not able to communicate properly in a virtual setting because of a lack of emotional factors such as tone, gestures, and expressions. Here, I attempt to solve this problem as a part of Microsoft Design Challenge 2022 by incorporating these factors into their communication via various methods."},
-    {href:"work/e-summit-2021/", img:"assets/img/projects/e-summit-2021.avif", w:"609", h:"900", tags:["Brand Identity","Web Design"],
-     title:"Defining the Brand Identity for IIT Roorkee's E-Summit 2021",
-     desc:"Built the brand identity, created deliverables, and designed the website for the flagship event of E-Cell IIT Roorkee. E-Summit is held annually to bring together the entrepreneurial, venture, and academic communities to a common ground and provides an avenue to exhibit entrepreneurial talent and creativity through discussions, seminars, competitions, and more."},
-    {href:"work/e-id-portal/", img:"assets/img/projects/e-id-portal.avif", w:"609", h:"900", tags:["SaaS Design","In-house Tool"],
-     title:"Designing the e-ID Card Management and Distribution Portal for IIT Roorkee",
-     desc:"Distributing and managing the physical ID cards of more than 8000 students was a hassle for the Dean of Students' Welfare. Hence we developed this in-house tool digitalize ID cards, distribute them, and manage and resolve queries if any."}
-  ];
-  var LINKS = [
-    [{t:"Behance", s:"For best visuals", href:"https://www.behance.net/vinyaspandey"},
-     {t:"Medium", s:"For detailed studies", href:"https://medium.com/@vinyaspandey"}],
-    [{t:"Dribbble", s:"For on-the-go shots", href:"https://dribbble.com/bittu911"},
-     {t:"LinkedIn", s:"For professional stories", href:"https://www.linkedin.com/in/vinyaspandey1109/"}],
-    [{t:"vinyaspandey1109@gmail.com", s:"For old school mailing", href:"mailto:vinyaspandey1109@gmail.com?subject=%F0%9F%91%8B%F0%9F%8F%BB%20Hey%20there!%20Let's%20get%20on%20a%20call%3F", mail:true}]
-  ];
-
-  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
-  function attrStrip(tags){
-    var out=""; for(var i=0;i<8;i++){ out+='<p>'+esc(tags[0])+'</p><p>*</p><p>'+esc(tags[1])+'</p><p>*</p>'; }
-    return out;
-  }
-  document.getElementById("projectsList").innerHTML = PROJECTS.map(function(p){
-    return '<div class="project-container" role="listitem"><a class="project-link-container" href="'+p.href+'">'+
-      '<div class="project-attributes-container top" aria-hidden="true"><div class="project-attributes-list">'+attrStrip(p.tags)+'</div></div>'+
-      '<div class="project-content-and-image"><div class="project-title-and-subtitle"><h2>'+esc(p.title)+'</h2><p class="project-description">'+esc(p.desc)+'</p>'+
-      '<span class="sr-only">'+esc(p.tags.join(", "))+'</span></div>'+
-      '<div class="image-container project"><img class="image-slot" src="'+p.img+'" alt="" width="'+p.w+'" height="'+p.h+'"></div></div>'+
-      '<div class="project-attributes-container bottom" aria-hidden="true"><div class="project-attributes-list">'+attrStrip(p.tags)+'</div></div>'+
-    '</a></div>';
-  }).join("");
-
-  var bracket = function(bottom){ var b = bottom ? " bottom" : "";
-    return '<div class="footer-action-bracket'+b+'" aria-hidden="true"><span class="bracket-edge'+b+'"></span><span class="footer-edge-base'+b+'"></span><span class="bracket-edge right'+b+'"></span></div>'; };
-  var rowsHost = document.getElementById("footerRows");
-  rowsHost.outerHTML = LINKS.map(function(row){
-    return '<div class="footer-actions-row'+(row[0].mail?' mailing':'')+'">'+row.map(function(l){
-      return '<a class="footer-action" href="'+l.href+'"'+(l.mail?'':' target="_blank" rel="noopener"')+'>'+bracket(false)+
-        '<div class="footer-action-title-container"><h1 class="footer-action-title">'+esc(l.t)+'</h1><div class="footer-action-underline-container"><div class="footer-action-underline"></div></div></div>'+
-        bracket(true)+'<p class="footer-action-subtitle">'+esc(l.s)+'</p></a>';
-    }).join("")+'</div>';
-  }).join("");
-
   /* ---------------- Helpers ---------------- */
   var reduceMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
   var mainMQ = window.matchMedia("(min-width: 992px)");
@@ -81,6 +26,7 @@
   var glance1 = document.getElementById("glance1"), glance2 = document.getElementById("glance2");
   var work = document.getElementById("work"), carousel = document.getElementById("carousel"), list = document.getElementById("projectsList");
   var strips = Array.prototype.slice.call(document.querySelectorAll(".project-attributes-list"));
+  var logos = document.getElementById("logos");
 
   /* ---------------- Render loop ---------------- */
   var raf = 0;
@@ -89,11 +35,36 @@
   function readScroll(){
     P.g1.tgt = inViewProgress(glance1, {startsEntering:true, startsExiting:false});
     P.g2.tgt = inViewProgress(glance2, {startsEntering:true, startsExiting:false});
-    if(mainMQ.matches){ P.work.tgt = inViewProgress(work, {startsEntering:true, addStart:true, start:50, startsExiting:true, addEnd:true, end:80}); }
+    if(mainMQ.matches){
+      // 0 when the section reaches the top of the screen, 1 when its sticky stretch ends.
+      // The stretch is 80vh per card (.work-container, --cards), so each card gets the same scroll.
+      var r = work.getBoundingClientRect();
+      P.work.tgt = clamp(-r.top / Math.max(1, r.height - window.innerHeight), 0, 1);
+    }
     else { P.attr.tgt = inViewProgress(work, {startsEntering:true, startsExiting:false}); }
   }
-  var endX = -5386;
-  function measure(){ endX = -(list.scrollWidth - carousel.clientWidth); }
+  // Distances below are measured from the content, so adding or removing projects, glance
+  // images or tags keeps everything in view. The constants reproduce the original motion.
+  var endX = 0, glanceRange1 = [0, 0], glanceRange2 = [0, 0];
+  var STRIP_SHIFT = 710, STRIP_SHIFT_MOBILE = 800;  // how far the tag strips slide each way
+  function overflow(el){ return Math.max(0, el.scrollWidth - el.clientWidth); }
+  // Tag strips are centred and wider than their card. Give short ones (short tag names) extra
+  // repeats so they never run out while sliding.
+  function fillStrip(s, shift){
+    var unit = Array.prototype.slice.call(s.children, 0, 4), guard = 0;  // tag, *, tag, *
+    function spare(){ var f = s.firstElementChild, l = s.lastElementChild; return (l.offsetLeft + l.offsetWidth - f.offsetLeft - s.clientWidth)/2; }
+    while(s.clientWidth && unit.length && spare() < shift && guard++ < 50){
+      unit.forEach(function(el){ s.appendChild(el.cloneNode(true)); });
+    }
+  }
+  function measure(){
+    endX = -(list.scrollWidth - carousel.clientWidth);
+    // Row 1 slides right and row 2 left, each across its own overflow (30px insets at the ends)
+    glanceRange1 = [30 - overflow(glance1), 30];
+    glanceRange2 = [30, -overflow(glance2) - 32];
+    strips.forEach(function(s){ fillStrip(s, mainMQ.matches ? STRIP_SHIFT : STRIP_SHIFT_MOBILE); });
+    fillLogos();
+  }
   function frame(){
     raf = 0;
     var moving = false;
@@ -102,14 +73,14 @@
     navGlow.style.transform = "translate3d(" + ((-50 + 100*P.glowX.cur)*vw/100) + "px,0,0)";
     var tx = (-50 + 100*P.hx.cur)*vw/100, ty = (-50 + 100*P.hy.cur)*vh/100;
     for(var i=0;i<hoverImgs.length;i++) hoverImgs[i].style.transform = "translate3d(" + tx + "px," + ty + "px,0)";
-    glance1.style.transform = "translate3d(" + lerpKF(P.g1.cur, 5, -572, 95, 30) + "px,0,0)";
-    glance2.style.transform = "translate3d(" + lerpKF(P.g2.cur, 5, 30, 95, -620) + "px,0,0)";
+    glance1.style.transform = "translate3d(" + lerpKF(P.g1.cur, 5, glanceRange1[0], 95, glanceRange1[1]) + "px,0,0)";
+    glance2.style.transform = "translate3d(" + lerpKF(P.g2.cur, 5, glanceRange2[0], 95, glanceRange2[1]) + "px,0,0)";
     if(mainMQ.matches){
       list.style.transform = "translate3d(" + (endX*P.work.cur) + "px,0,0)";
-      var ax = 710 - 1420*P.work.cur;
+      var ax = STRIP_SHIFT*(1 - 2*P.work.cur);
       for(var j=0;j<strips.length;j++) strips[j].style.transform = "translate3d(" + ax + "px,0,0)";
     } else {
-      var bx = -800*P.attr.cur;
+      var bx = -STRIP_SHIFT_MOBILE*P.attr.cur;
       for(var m=0;m<strips.length;m++) strips[m].style.transform = "translate3d(" + bx + "px,0,0)";
     }
     if(moving) kick();
@@ -177,7 +148,20 @@
   });
 
   /* ---------------- Logos marquee: runs while in view ---------------- */
-  var logos = document.getElementById("logos");
+  // The build sets the loop length from the logos' widths (constant speed). Here we only make
+  // sure there are enough copies of the row to fill the strip, however few logos there are.
+  function fillLogos(){
+    var row = logos.firstElementChild, w = row ? row.offsetWidth : 0, added = false;
+    while(w && logos.children.length * w < logos.clientWidth + w){
+      var copy = row.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true");
+      Array.prototype.forEach.call(copy.querySelectorAll("img"), function(img){ img.alt = ""; });
+      logos.appendChild(copy);
+      added = true;
+    }
+    // restart every row together so the copies stay in step
+    if(added) Array.prototype.forEach.call(logos.children, function(r){ r.style.animation = "none"; void r.offsetWidth; r.style.animation = ""; });
+  }
   if("IntersectionObserver" in window){
     new IntersectionObserver(function(entries){ entries.forEach(function(en){ logos.classList.toggle("playing", en.isIntersecting); }); }).observe(logos);
   } else { logos.classList.add("playing"); }

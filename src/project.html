@@ -1,0 +1,21 @@
+---
+# The layout of every project page (work/<Slug>/index.html). Each {{...}} is filled from that
+# project's row in content/projects.csv; see "Project pages" in README.md for the columns.
+main_class: page-container project-page
+script: about.js
+secret: for more cool projects, check out my socials maybe
+---
+  <div class="project-hero-container">
+    <div class="project-hero-text"><h1 class="project-heading">{{heading}}</h1><p class="project-hero-description">{{description}}</p></div>
+    <div class="project-hero-image-container"><img class="project-hero-image" src="{{hero}}" alt="" fetchpriority="high"></div>
+  </div>
+  <div class="project-content-container"><div class="project-meta-flex">
+    <div class="project-meta-individual"><p>Client:</p><p>{{org}}</p></div>
+    <div class="project-meta-individual"><p>Timeline:</p><p>{{timeline}}</p></div>
+    <div class="project-meta-individual"><p>Team:</p><p>{{team}}</p></div>
+  </div></div>
+  <div class="project-content-container">
+    <p class="wavy-underline section-label">Overview</p><p>&nbsp;</p>
+    <h1 class="project-goal">The goal</h1><p>{{goal}}</p>
+{{results_label}}  </div>
+{{results}}{{sections}}

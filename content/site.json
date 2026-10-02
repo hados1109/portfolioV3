@@ -1,0 +1,57 @@
+{
+  "url": "https://vinyas.me/",
+  "name": "Vinyas Pandey",
+  "age": 25,
+  "description": "I am Vinyas Pandey, a product designer from Noida, India. Currently designing at Sprinto.",
+  "og_image": "assets/img/ui/og-image.png",
+  "og_image_alt": "Vinyas Pandey | Portfolio",
+  "nav": [
+    {
+      "label": "HOME",
+      "page": "home",
+      "href": "./"
+    },
+    {
+      "label": "ABOUT",
+      "page": "about",
+      "href": "about/"
+    },
+    {
+      "label": "RESUME",
+      "href": "https://drive.google.com/drive/folders/16NA4Vg2wVpLMmNvJw1I25iqJxJHvULP1?usp=sharing"
+    }
+  ],
+  "links": [
+    [
+      {
+        "title": "Behance",
+        "subtitle": "For best visuals",
+        "href": "https://www.behance.net/vinyaspandey"
+      },
+      {
+        "title": "Medium",
+        "subtitle": "For detailed studies",
+        "href": "https://medium.com/@vinyaspandey"
+      }
+    ],
+    [
+      {
+        "title": "Dribbble",
+        "subtitle": "For on-the-go shots",
+        "href": "https://dribbble.com/bittu911"
+      },
+      {
+        "title": "LinkedIn",
+        "subtitle": "For professional stories",
+        "href": "https://www.linkedin.com/in/vinyaspandey1109/"
+      }
+    ],
+    [
+      {
+        "title": "vinyaspandey1109@gmail.com",
+        "subtitle": "For old school mailing",
+        "href": "mailto:vinyaspandey1109@gmail.com?subject=%F0%9F%91%8B%F0%9F%8F%BB%20Hey%20there!%20Let's%20get%20on%20a%20call%3F"
+      }
+    ]
+  ]
+}
