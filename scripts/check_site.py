@@ -67,8 +67,8 @@ def main():
     for page in pages():
         rel = page.relative_to(ROOT).as_posix()
         text = page.read_text(encoding="utf-8")
-        for name, value in re.findall(r'\s(src|href|srcset|poster)="([^"]*)"', text):
-            for url in ([part.strip().split(" ")[0] for part in value.split(",")] if name == "srcset" else [value]):
+        for name, value in re.findall(r'\s(src|href|srcset|poster|data-src|data-srcset)="([^"]*)"', text):
+            for url in ([part.strip().split(" ")[0] for part in value.split(",")] if name.endswith("srcset") else [value]):
                 check(rel, page.parent, url)
         for url in re.findall(r'<meta property="og:image" content="([^"]*)"', text):
             check(rel, page.parent, url)

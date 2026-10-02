@@ -150,13 +150,13 @@ def relink(page, root):
 
     def attr(m):
         name, value = m.group(1), m.group(2)
-        if name == "srcset":
+        if name.endswith("srcset"):
             value = ", ".join(fix(part.strip().split(" ", 1)[0]) + (" " + part.strip().split(" ", 1)[1] if " " in part.strip() else "")
                               for part in value.split(","))
         else:
             value = fix(value)
         return ' %s="%s"' % (name, value)
-    return re.sub(r'\s(src|href|srcset|poster)="([^"]*)"', attr, page)
+    return re.sub(r'\s(src|href|srcset|poster|data-src|data-srcset)="([^"]*)"', attr, page)
 
 
 # ---------------------------------------------------------------- content

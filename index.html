@@ -54,14 +54,15 @@
 
 <main class="page-container" id="top">
 
-  <!-- Images that follow the cursor when hovering underlined words -->
+  <!-- Images that follow the cursor when hovering underlined words. Their URLs sit in data-src so phones never
+       fetch them; home.js swaps them in up front wherever hovering is possible (see issue #10). -->
   <div class="underline-hover-images-container" aria-hidden="true">
-    <div class="underline-hover-image rickroll" data-img="pronounce"><div class="image-container"><picture><source srcset="assets/img/hover/rickroll.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/rickroll.gif" alt="" width="320" height="320"></picture></div></div>
-    <div class="underline-hover-image" data-img="name"><div class="image-container"><img class="image-slot" src="assets/img/hover/name-photo.avif" alt="" width="738" height="984"></div></div>
-    <div class="underline-hover-image" data-img="hooked"><div class="image-container"><picture><source srcset="assets/img/hover/pokeballs.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/pokeballs.gif" alt="" width="640" height="640"></picture></div></div>
-    <div class="underline-hover-image enjoy" data-img="enjoy"><div class="image-container"><picture><source srcset="assets/img/hover/side-navigation-exploration.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/side-navigation-exploration.gif" alt="" width="400" height="300"></picture></div></div>
-    <div class="underline-hover-image delighted" data-img="delighted"><div class="image-container"><picture><source srcset="assets/img/hover/website-exploration.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/website-exploration.gif" alt="" width="560" height="398"></picture></div></div>
-    <div class="underline-hover-image inspired" data-img="inspired"><div class="image-container"><picture><source srcset="assets/img/hover/lightbulb.avif" type="image/avif"><img class="image-slot" src="assets/img/hover/lightbulb.gif" alt="" width="720" height="720"></picture></div></div>
+    <div class="underline-hover-image rickroll" data-img="pronounce"><div class="image-container"><picture><source data-srcset="assets/img/hover/rickroll.avif" type="image/avif"><img class="image-slot" data-src="assets/img/hover/rickroll.gif" alt="" width="320" height="320"></picture></div></div>
+    <div class="underline-hover-image" data-img="name"><div class="image-container"><img class="image-slot" data-src="assets/img/hover/name-photo.avif" alt="" width="738" height="984"></div></div>
+    <div class="underline-hover-image" data-img="hooked"><div class="image-container"><picture><source data-srcset="assets/img/hover/pokeballs.avif" type="image/avif"><img class="image-slot" data-src="assets/img/hover/pokeballs.gif" alt="" width="640" height="640"></picture></div></div>
+    <div class="underline-hover-image enjoy" data-img="enjoy"><div class="image-container"><picture><source data-srcset="assets/img/hover/side-navigation-exploration.avif" type="image/avif"><img class="image-slot" data-src="assets/img/hover/side-navigation-exploration.gif" alt="" width="400" height="300"></picture></div></div>
+    <div class="underline-hover-image delighted" data-img="delighted"><div class="image-container"><picture><source data-srcset="assets/img/hover/website-exploration.avif" type="image/avif"><img class="image-slot" data-src="assets/img/hover/website-exploration.gif" alt="" width="560" height="398"></picture></div></div>
+    <div class="underline-hover-image inspired" data-img="inspired"><div class="image-container"><picture><source data-srcset="assets/img/hover/lightbulb.avif" type="image/avif"><img class="image-slot" data-src="assets/img/hover/lightbulb.gif" alt="" width="720" height="720"></picture></div></div>
   </div>
 
   <!-- Hero -->

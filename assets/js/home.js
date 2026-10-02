@@ -102,14 +102,36 @@
   var byName = {};
   hoverImgs.forEach(function(el){ byName[el.getAttribute("data-img")] = el; });
   function fade(el, to, ms){ el.style.transition = "opacity " + ms + "ms linear"; el.style.opacity = to; }
+  // Fetch every hover image as soon as the page could show them (wide screen + a pointer that hovers), not on
+  // first hover, so a slow connection has the whole visit to finish. Phones never match, so never download them.
+  var hoverMQ = window.matchMedia("(min-width: 992px) and (hover: hover)");
+  function loadHoverImgs(){
+    if(!hoverMQ.matches) return;
+    Array.prototype.forEach.call(document.querySelectorAll(".underline-hover-image [data-srcset], .underline-hover-image [data-src]"), function(el){
+      if(el.hasAttribute("data-srcset")){ el.srcset = el.getAttribute("data-srcset"); el.removeAttribute("data-srcset"); }
+      if(el.hasAttribute("data-src")){ el.src = el.getAttribute("data-src"); el.removeAttribute("data-src"); }
+    });
+    hoverMQ.removeEventListener ? hoverMQ.removeEventListener("change", loadHoverImgs) : hoverMQ.removeListener(loadHoverImgs);
+  }
+  hoverMQ.addEventListener ? hoverMQ.addEventListener("change", loadHoverImgs) : hoverMQ.addListener(loadHoverImgs);
+  loadHoverImgs();
+  // Show an image only once it has loaded, so a half-downloaded one never paints in; if it finishes while the
+  // word is still hovered, it fades in then.
+  function whenLoaded(el, fn){
+    var img = el.querySelector("img");
+    if(!img || (img.complete && img.naturalWidth)) return fn();
+    img.addEventListener("load", function(){ fn(); }, {once:true});
+  }
+
   var pronounceTimer = 0;
   Array.prototype.forEach.call(document.querySelectorAll("[data-hover]"), function(word){
-    var img = byName[word.getAttribute("data-hover")];
+    var img = byName[word.getAttribute("data-hover")], hovered = false;
     word.addEventListener("mouseenter", function(){
-      fade(img, 1, 100);
+      hovered = true;
+      whenLoaded(img, function(){ if(hovered) fade(img, 1, 100); });
       if(word.getAttribute("data-hover") !== "inspired"){ clearTimeout(pronounceTimer); fade(byName.pronounce, 0, 100); }
     });
-    word.addEventListener("mouseleave", function(){ fade(img, 0, 50); });
+    word.addEventListener("mouseleave", function(){ hovered = false; fade(img, 0, 50); });
   });
 
   /* ---------------- Pronunciation easter egg ---------------- */
