@@ -58,7 +58,10 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; margi
 .navbar-profile-images-container:hover{ transform:scale(1.05); }
 .navbar-profile-images-container:active{ transform:scale(.965); }
 .profile-image{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.profile-image[hidden]{ display:none; }
+/* The photos are stacked, the first on top; data-photo on <html> (set in the layout's <head>) hides the ones above the picked one */
+html[data-photo="1"] .profile-image[data-order="0"],
+html[data-photo="2"] .profile-image:not([data-order="2"],[data-order="3"]),
+html[data-photo="3"] .profile-image:not([data-order="3"]){ display:none; }
 .navbar-controls{ position:relative; overflow:hidden; width:446px; height:56px; padding:0 16px; border-radius:2px; display:flex; justify-content:space-around; align-items:center;
   background-image:linear-gradient(var(--nav-bg),var(--nav-bg)),url("../img/ui/navbar-controls.avif"); background-position:0 0,50%; background-repeat:repeat,repeat; background-size:auto,507px 56px; }
 .navbar-control-link{ position:relative; z-index:100; color:var(--tertiary); padding:8px 12px 4px; font-size:16px; font-weight:300; line-height:24px; text-decoration:none; transition:all .25s; }

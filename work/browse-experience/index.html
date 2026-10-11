@@ -20,7 +20,20 @@
 <meta name="twitter:description" content="Quizizz is mainly used for a review use case, which is a once-a-month use case. Although Quizizz hosts a vast public library with resources on every granularity, there is some gap when communicating this to the teachers. We paired up these resources with the widely used standards and curricula that teachers rely on and aced the high frequency use case.">
 <meta name="twitter:image" content="https://vinyas.me/content/projects/browse-experience/og.jpg">
 <link rel="canonical" href="https://vinyas.me/work/browse-experience/">
-<link rel="icon" type="image/png" href="../../assets/img/ui/favicon.png">
+<link rel="icon" type="image/png" href="../../assets/img/ui/favicon-1.png">
+<script>
+  /* Navbar photo: the one last picked (by clicking it) stays on every page, and the favicon matches it.
+     Runs before the page shows so it never flashes the first photo. 4 = the number of photos. */
+  (function(){
+    var root = document.documentElement, icon = document.querySelector('link[rel="icon"]');
+    function show(i){ root.setAttribute("data-photo", i); icon.href = icon.href.replace(/favicon-\d+/, "favicon-" + (i + 1)); }
+    function saved(){ try { var i = parseInt(localStorage.getItem("navPhoto"), 10); return i >= 0 && i < 4 ? i : 0; } catch (e) { return 0; } }
+    window.setNavPhoto = function(i){ show(i); try { localStorage.setItem("navPhoto", i); } catch (e) {} };
+    show(saved());
+    window.addEventListener("pageshow", function(e){ if (e.persisted) show(saved()); });  // back/forward to a cached page
+    window.addEventListener("storage", function(e){ if (e.key === "navPhoto") show(saved()); });  // other open tabs
+  })();
+</script>
 <link rel="apple-touch-icon" href="../../assets/img/ui/webclip.png">
 <link rel="preload" href="../../assets/fonts/bon-vivant.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/helvetica-neue-roman.woff2" as="font" type="font/woff2" crossorigin>

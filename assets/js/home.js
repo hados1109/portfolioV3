@@ -144,12 +144,10 @@
   });
 
   /* ---------------- Profile photo stack ---------------- */
-  var stack = Array.prototype.slice.call(document.querySelectorAll("#profileStack .profile-image"))
-    .sort(function(a,b){ return a.getAttribute("data-order") - b.getAttribute("data-order"); });
+  // setNavPhoto (in the layout's <head>) remembers the pick for other pages and updates the favicon
+  var photoCount = document.querySelectorAll("#profileStack .profile-image").length;
   document.getElementById("profileStack").addEventListener("click", function(){
-    var visible = stack.filter(function(el){ return !el.hidden; });
-    if(visible.length <= 1){ stack.forEach(function(el){ el.hidden = false; }); }
-    else { visible[0].hidden = true; }
+    setNavPhoto((+document.documentElement.getAttribute("data-photo") + 1) % photoCount);
   });
 
   /* ---------------- Home link ---------------- */

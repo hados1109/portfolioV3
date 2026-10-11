@@ -88,6 +88,10 @@ def main():
     for url in re.findall(r"<loc>([^<]*)</loc>", sitemap.read_text(encoding="utf-8")):
         check("sitemap.xml", ROOT, url)
 
+    # The script in the layout's <head> sets the favicon to favicon-<n>.png, matching navbar photo-<n>
+    for photo in sorted((ROOT / "assets" / "img" / "profile").glob("photo-*")):
+        check("src/layout.html", ROOT, "assets/img/ui/favicon-%s.png" % re.search(r"photo-(\d+)", photo.name).group(1))
+
     image_dirs = [ROOT / "assets" / "img", ROOT / "content" / "projects"]
     unused = [p for d in image_dirs for p in sorted(d.rglob("*"))
               if p.is_file() and p.suffix.lower() in (".avif", ".png", ".jpg", ".jpeg", ".gif", ".webp") and p not in used]
