@@ -48,7 +48,7 @@ RULES = [
     ("assets/img/ui/og-image.png",    1200, None, False),  # link previews: social sites don't read AVIF
     ("content/projects/*/og.jpg",     1200, None, False),
     ("assets/img/ui/webclip.png",      180,  180, False),  # home-screen icon: Apple wants a 180px PNG
-    ("assets/img/ui/favicon.png",     None, None, False),
+    ("assets/img/ui/favicon-*.png",   None, None, False),
     ("assets/img/ui/*",               None, None, False),  # small interface graphics used by the CSS
     ("assets/img/logos/*",            None,  100, True),   # shown up to 48px tall
     ("assets/img/glance/*",           None,  720, True),   # rows are 360px tall
