@@ -514,7 +514,32 @@ def build():
         content = fill(body, project_values(p), "src/project.html")
         urls.append(render_page(site, layout, page_meta, content, "work/%s/index.html" % p["slug"], p["source"]))
 
+    write_redirects(site)
     write_sitemap(site, urls)
+
+
+def write_redirects(site):
+    """A page at a nav item's `redirect` path (resume/ makes vinyas.me/resume) that sends visitors to its href.
+    GitHub Pages can't redirect on the server, so it's a meta refresh. Left out of the sitemap."""
+    for item in site["nav"]:
+        path = item.get("redirect", "").strip("/")
+        if not path:
+            continue
+        if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", path):
+            raise BuildError('content/site.json: `"redirect": "%s"` should be a lowercase word, like "resume/"' % item["redirect"])
+        target = ROOT / path / "index.html"
+        if target.exists() and MARKER not in target.read_text(encoding="utf-8"):
+            raise BuildError("content/site.json: %s/ is already a page, so it can't redirect" % path)
+        url = esc(item["href"])
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with open(target, "w", encoding="utf-8", newline="\n") as f:
+            f.write('<!DOCTYPE html>\n<!-- %s.py from content/site.json. Edit that, not this file. -->\n'
+                    '<html lang="en">\n<head>\n<meta charset="utf-8">\n<title>%s – %s</title>\n'
+                    '<meta name="robots" content="noindex">\n<link rel="canonical" href="%s">\n'
+                    '<meta http-equiv="refresh" content="0; url=%s">\n</head>\n'
+                    '<body><p>Redirecting to <a href="%s">%s</a>.</p></body>\n</html>\n'
+                    % (MARKER, esc(item["label"].title()), esc(site["name"]), url, url, url, url))
+        print("built", path + "/index.html")
 
 
 def write_sitemap(site, paths):
