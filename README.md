@@ -37,7 +37,7 @@ If you'd rather type `python3`, run `source .venv/bin/activate` once in each new
 | `assets/js/home.js` | Home page interactions |
 | `assets/js/about.js` | About and project page interactions |
 | `assets/img/` | The other images, grouped by where they appear |
-| `index.html`, `about/`, `work/`, `sitemap.xml` | **Generated** by the build. Don't edit these; your changes would be overwritten. |
+| `index.html`, `about/`, `work/`, `resume/`, `sitemap.xml` | **Generated** by the build. Don't edit these; your changes would be overwritten. |
 | `scripts/` | `build.py` (builds the pages), `new_project.py` (starts a project), `optimize_images.py` (compresses images), `check_site.py` (finds broken links) |
 
 In the source files, write paths from the site root (`assets/img/…`, `about/`). The build fixes them up for each page. It also adds `width`/`height` to any image that doesn't have them. In a project's `index.md`, an image's bare file name (`screen.avif`) means the file in that project's folder.
@@ -48,7 +48,7 @@ In the source files, write paths from the site root (`assets/img/…`, `about/`)
 |---|---|
 | Home or about page text | Edit `src/pages/home.html` or `src/pages/about.html` |
 | Navbar, footer, `<head>` | Edit `src/layout.html` (one place for every page) |
-| Footer or navbar links, resume link | Edit `links` or `nav` in `content/site.json` |
+| Footer or navbar links, resume link | Edit `links` or `nav` in `content/site.json`. The resume link's `redirect` also makes vinyas.me/resume send people there. |
 | Age | `age` in `content/site.json`. The footer year updates on its own. |
 | A project's page or card | Edit its `content/projects/<slug>/index.md` |
 | An image | Replace the file (same name), then run the image optimizer (below) |
