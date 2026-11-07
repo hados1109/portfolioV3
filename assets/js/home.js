@@ -21,7 +21,7 @@
   };
 
   var navGlow = document.getElementById("navGlow");
-  var navbarContainer = document.getElementById("navbarContainer");
+  var navbarContainer = document.getElementById("navbarContainer"), navbar = document.querySelector(".navbar");
   var hoverImgs = Array.prototype.slice.call(document.querySelectorAll(".underline-hover-image"));
   var glance1 = document.getElementById("glance1"), glance2 = document.getElementById("glance2");
   var work = document.getElementById("work"), carousel = document.getElementById("carousel"), list = document.getElementById("projectsList");
@@ -93,7 +93,7 @@
     P.hy.tgt = e.clientY / window.innerHeight;
     // the glow shows while the pointer is anywhere in the navbar strip (as on the original)
     var r = navbarContainer.getBoundingClientRect();
-    var nr = document.querySelector(".navbar").getBoundingClientRect();
+    var nr = navbar.getBoundingClientRect();
     navGlow.classList.toggle("on", e.clientY >= nr.top && e.clientY <= nr.bottom && e.clientX >= r.left && e.clientX <= r.right);
     kick();
   }, {passive:true});
@@ -141,30 +141,6 @@
     clearTimeout(pronounceTimer);
     fade(el, 1, 100);
     pronounceTimer = setTimeout(function(){ fade(el, 0, 100); }, 2100);
-  });
-
-  /* ---------------- Profile photo stack ---------------- */
-  // setNavPhoto (in the layout's <head>) remembers the pick for other pages and updates the favicon
-  var photoCount = document.querySelectorAll("#profileStack .profile-image").length;
-  document.getElementById("profileStack").addEventListener("click", function(){
-    setNavPhoto((+document.documentElement.getAttribute("data-photo") + 1) % photoCount);
-  });
-
-  /* ---------------- Home link ---------------- */
-  document.getElementById("homeLink").addEventListener("click", function(e){
-    e.preventDefault();
-    window.scrollTo({top:0, behavior: reduceMQ.matches ? "auto" : "smooth"});
-  });
-
-  /* ---------------- Footer link underline ---------------- */
-  Array.prototype.forEach.call(document.querySelectorAll(".footer-action"), function(a){
-    var u = a.querySelector(".footer-action-underline"), anim = null;
-    function play(frames, opts){ if(anim) anim.cancel(); anim = u.animate(frames, opts); }
-    function enter(){ play([{transform:"translateX(-100%)"},{transform:"translateX(0)"}], {duration:reduceMQ.matches?0:300, easing:"ease-out", fill:"forwards"}); }
-    function leave(){ play([{transform:getComputedStyle(u).transform === "none" ? "translateX(0)" : getComputedStyle(u).transform},{transform:"translateX(100%)"}], {duration:reduceMQ.matches?0:500, easing:"linear", fill:"forwards"});
-      anim.onfinish = function(){ if(anim){ anim.cancel(); anim = null; } }; }
-    a.addEventListener("mouseenter", enter); a.addEventListener("focus", enter);
-    a.addEventListener("mouseleave", leave); a.addEventListener("blur", leave);
   });
 
   /* ---------------- Logos marquee: runs while in view ---------------- */
