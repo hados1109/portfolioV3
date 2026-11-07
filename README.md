@@ -34,8 +34,9 @@ If you'd rather type `python3`, run `source .venv/bin/activate` once in each new
 | `content/projects/_template/` | What a new project starts from |
 | `content/logos.csv` | The previous-workplaces logo carousel |
 | `assets/css/site.css` | All styles |
+| `assets/js/site.js` | Interactions every page shares (photo stack, footer links, scroll to top) |
 | `assets/js/home.js` | Home page interactions |
-| `assets/js/about.js` | About and project page interactions |
+| `assets/js/about.js` | About and project page navbar glow |
 | `assets/img/` | The other images, grouped by where they appear |
 | `index.html`, `about/`, `work/`, `resume/`, `sitemap.xml` | **Generated** by the build. Don't edit these; your changes would be overwritten. |
 | `scripts/` | `build.py` (builds the pages), `new_project.py` (starts a project), `optimize_images.py` (compresses images), `check_site.py` (finds broken links) |
